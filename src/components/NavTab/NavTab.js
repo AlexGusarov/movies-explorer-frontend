@@ -2,9 +2,15 @@ function NavTab() {
   return (
     <nav className="navtab">
       <ul className="navtab__list">
-        <li className="navtab__link">О проекте</li>
-        <li className="navtab__link">Технологии</li>
-        <li className="navtab__link">Студент</li>
+        <li className="navtab__item">
+          <a className="navtab__link" href="#project">О проекте</a>
+        </li>
+        <li className="navtab__item">
+          <a className="navtab__link" href="#techs">Технологии</a>
+        </li>
+        <li className="navtab__item">
+          <a className="navtab__link" href="#student">Студент</a>
+        </li>
       </ul>
     </nav>
   )

@@ -5,7 +5,7 @@ import githubAddress from '../../constants';
 
 function AboutMe() {
   return (
-    <section className="about-me">
+    <section className="about-me" id="student">
       <SectionHeading text="Студент" />
       <div className="about-me__container">
         <div className="about-me__text-container">

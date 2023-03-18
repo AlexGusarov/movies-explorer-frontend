@@ -2,7 +2,7 @@ import SectionHeading from '../SectionHeading/SectionHeading';
 
 function AboutProject() {
   return (
-    <section className="about-project">
+    <section className="about-project" id="project">
       <SectionHeading text="О проекте" />
       <ul className="about-project__list">
         <li className="about-project__list-item">
