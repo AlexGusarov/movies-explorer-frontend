@@ -13,7 +13,7 @@
 }
 
 .about-project__list-item {
-  font-family: 'Inter';
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-style: normal;
   font-weight: 400;
   letter-spacing: -0.04em;
@@ -23,7 +23,7 @@
 .about-project__list-title {
   margin: 0;
   padding: 0 0 26px;
-  font-family: 'Inter';
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 20px;
@@ -51,7 +51,7 @@
   justify-content: center;
   height: 36px;
   margin: 0;
-  font-family: 'Inter';
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 14px;
@@ -80,7 +80,7 @@
   justify-content: center;
   height: 36px;
   margin: 0;
-  font-family: 'Inter';
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-style: normal;
   font-weight: 500;
   font-size: 14px;
