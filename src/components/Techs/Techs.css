@@ -1,6 +1,7 @@
 .techs {
   padding: 100px 70px 100px;
   background: #F5F5F5;
+  box-sizing: border-box;
 }
 
 .techs__text-container {

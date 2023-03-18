@@ -1,6 +1,7 @@
 .about-project {
   padding: 110px 70px;
   background-color: #fff;
+  box-sizing: border-box;
 }
 
 .about-project__list {

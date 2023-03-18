@@ -5,6 +5,7 @@
   background-color: #000;
   padding: 25px 0;
   max-height: 66px;
+  box-sizing: border-box;
 }
 
 .navtab__list {
