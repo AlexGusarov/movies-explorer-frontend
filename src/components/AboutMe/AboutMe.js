@@ -1,7 +1,7 @@
 import SectionHeading from '../SectionHeading/SectionHeading';
 import Portfolio from '../Portfolio/Portfolio';
 import avatar from '../../images/avatar.jpg';
-import githubAddress from '../../constants';
+import { githubAddress } from '../../utils/constants';
 
 function AboutMe() {
   return (
