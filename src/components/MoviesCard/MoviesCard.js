@@ -1,4 +1,5 @@
 import './MoviesCard.css';
+import minToHours from '../../utils/minToHours';
 
 function MoviesCard(props) {
   return (
@@ -6,7 +7,7 @@ function MoviesCard(props) {
       <div className="movies-card__container">
         <div className="movies-card__wrapper">
           <p className="movies-card__name">{props.nameRU}</p>
-          <span className="movies-card__duration">{props.duration}</span>
+          <span className="movies-card__duration">{minToHours(props.duration)}</span>
         </div>
         <button className="movies-card__button" aria-label="Save" />
       </div>
