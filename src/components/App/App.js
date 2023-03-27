@@ -9,7 +9,6 @@ import { films } from '../../utils/constants';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 
-
 function App() {
 
   const location = useLocation();
@@ -24,10 +23,9 @@ function App() {
     return pathsForFooter.includes(location.pathname.slice(1));
   }
 
-
   return (
     <div className='root'>
-      {isHeaderNeed() && <Header />}
+      {isHeaderNeed() && <Header loggedIn={true} />}
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/signup" element={<Register />} />

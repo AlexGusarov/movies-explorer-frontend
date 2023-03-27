@@ -1,16 +1,15 @@
 import React from "react";
-import { Link } from "react-router-dom";
 import Logo from "../Logo/Logo";
+import Navigation from "../Navigation/Navigation";
 
-function Header() {
+
+function Header({ loggedIn }) {
+
 
   return (
-    <header className="header header_main">
+    <header className={!loggedIn ? 'header header_main' : 'header'}>
       <Logo />
-      <div className="header__link-container">
-        <Link to="/sign-up" className="header__link">Регистрация</Link>
-        <Link to="/sign-in" className="header__link">Войти</Link>
-      </div>
+      <Navigation loggedIn={loggedIn} />
     </header>
   )
 }
