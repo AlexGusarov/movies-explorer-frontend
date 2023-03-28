@@ -48,12 +48,16 @@
 .navigation__links-container {
   width: 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-end;
 }
 
 .navigation__link-wrapper {
   display: flex;
   gap: 16px;
+}
+
+.navigation__link-profile {
+  margin-left: auto;
 }
 
 
