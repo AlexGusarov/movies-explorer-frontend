@@ -1,5 +1,6 @@
 import { Link } from 'react-router-dom';
-import Profile from '../Profile/Profile';
+import ProfileButton from '../ProfileButton/ProfileButton';
+import Burger from '../Burger/Burger';
 
 function Navigation({ loggedIn }) {
   return (
@@ -17,9 +18,10 @@ function Navigation({ loggedIn }) {
               <Link to="/movies" className="navigation__link navigation__link_logged-out">Фильмы</Link>
               <Link to="/saved-films" className="navigation__link navigation__link_logged-out">Сохраненные фильмы</Link>
             </div>
-            <Link to="/sign-in" className="navigation__link">
-              {<Profile />}
-            </Link>
+            {<Burger />}
+            {/* <Link to="/sign-in" className="navigation__link">
+              {<ProfileButton />}             
+            </Link> */}
           </div>
 
         </>

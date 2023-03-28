@@ -8,8 +8,6 @@
   list-style-type: none;
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-  max-height: 1274px;
-  row-gap: 24px;
-  column-gap: 30px;
-
+  row-gap: 30px;
+  column-gap: 24px;
 }

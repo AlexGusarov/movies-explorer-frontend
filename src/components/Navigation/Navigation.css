@@ -1,8 +1,8 @@
 .navigation {
   display: flex;
   gap: 30px;
-  margin-left: auto;
   width: 67%;
+  justify-content: flex-end;
 }
 
 .navigation__link {
@@ -46,6 +46,7 @@
 }
 
 .navigation__links-container {
+  width: 100%;
   display: flex;
   justify-content: space-between;
 }

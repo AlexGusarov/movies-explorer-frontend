@@ -1,4 +1,4 @@
-.profile {
+.profile-button {
   width: 100px;
   height: 32px;
   background: #FFFFFF;
@@ -16,4 +16,5 @@
   line-height: 0.92;
   color: #000000;
   text-align: start;
+  cursor: pointer;
 }

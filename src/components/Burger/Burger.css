@@ -1,0 +1,93 @@
+/* Гамбургер иконка */
+.burger-button {
+  width: 44px;
+  height: 44px;
+  border: none;
+  background-color: transparent;
+  position: relative;
+  z-index: 2;
+  overflow: hidden;
+}
+
+.burger-button_active {
+  position: fixed;
+  top: 22px;
+  right: 22px;
+}
+
+.burger-button__line {
+  width: 28px;
+  height: 3px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  background-color: #000;
+  transition: all 0.5s;
+}
+
+.burger-button__line:nth-of-type(2) {
+  top: calc(50% - 7px);
+}
+
+.burger-button__line:nth-of-type(3) {
+  top: calc(50% + 7px);
+}
+
+/* Меняем гамбургер иконку, когда меню открыто */
+.burger-button__line_active:nth-of-type(1) {
+  display: none;
+}
+
+.burger-button__line_active:nth-of-type(2) {
+  top: 50%;
+  transform: translate(-50%, 0%) rotate(45deg);
+  width: 22px;
+}
+
+.burger-button__line_active:nth-of-type(3) {
+  top: 50%;
+  transform: translate(-50%, 0%) rotate(-45deg);
+  width: 22px;
+}
+
+/* Меню, которое будет появляться */
+.burger__menu {
+  position: fixed;
+  top: 0;
+  right: 0;
+  width: 67%;
+  height: 100%;
+  box-sizing: border-box;
+  padding: 159px 0 90px;
+  margin: 0;
+  background: #FFF;
+  transform: translateX(100%);
+  transition: transform 0.5s;
+  z-index: 1;
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 28px;
+}
+
+.burger__menu_active {
+  transform: translateX(0);
+}
+
+
+.burger__link {
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-style: normal;
+  color: #000;
+  text-decoration: none;
+  text-align: center;
+  font-weight: 500;
+  font-size: 18px;
+  line-height: 1.22;
+}
+
+.burger__item:last-child {
+  margin-top: auto;
+}
