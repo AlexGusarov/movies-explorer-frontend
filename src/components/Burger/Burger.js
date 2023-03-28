@@ -1,12 +1,15 @@
 import './Burger.css';
+import { useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { useState } from 'react';
 import ProfileButton from '../ProfileButton/ProfileButton';
+import { сlickOutside } from '../../utils/hooks';
 
 
 function Burger() {
   const [isActive, setIsActive] = useState(false);
 
+  //открыть-закрыть боковое меню
   function toggleBurger() {
     if (isActive) {
       setIsActive(false)
@@ -15,13 +18,18 @@ function Burger() {
     }
   }
 
+  //закрыть кликом вне меню
+  const burgerRef = useRef(null);
+  сlickOutside(burgerRef, () => toggleBurger());
+
   return (
     <>
       <div className={
         isActive
           ? 'burger-button burger-button_active'
           : 'burger-button'
-      } onClick={toggleBurger} >
+      } onClick={toggleBurger}
+        ref={burgerRef}>
         <span className={
           isActive
             ? 'burger-button__line burger-button__line_active'
@@ -58,7 +66,6 @@ function Burger() {
       </ul>
     </>
   )
-
 };
 
 export default Burger;

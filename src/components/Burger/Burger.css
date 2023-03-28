@@ -1,4 +1,3 @@
-/* Гамбургер иконка */
 .burger-button {
   width: 44px;
   height: 44px;
@@ -34,7 +33,6 @@
   top: calc(50% + 7px);
 }
 
-/* Меняем гамбургер иконку, когда меню открыто */
 .burger-button__line_active:nth-of-type(1) {
   display: none;
 }
@@ -51,7 +49,6 @@
   width: 22px;
 }
 
-/* Меню, которое будет появляться */
 .burger__menu {
   position: fixed;
   top: 0;
@@ -75,7 +72,6 @@
 .burger__menu_active {
   transform: translateX(0);
 }
-
 
 .burger__link {
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
