@@ -20,7 +20,7 @@ function Burger() {
 
   //закрыть кликом вне меню
   const burgerRef = useRef(null);
-  сlickOutside(burgerRef, () => toggleBurger());
+  сlickOutside(burgerRef, () => setIsActive(false));
 
   return (
     <>
