@@ -46,12 +46,20 @@
 .movies-card__button {
   width: 30px;
   height: 30px;
-  background: url('../../images/badge.svg') center center no-repeat;
+  background: url('../../images/icon-save.svg') center center no-repeat;
+  background-color: #A0A0A0;
+  /* цвет по макету - #F9F9F9 - сливается с белым фоном */
+  border-radius: 50%;
   align-self: center;
   border: none;
   cursor: pointer;
   transition: all 0.2s;
 }
+
+.movies-card__button_saved {
+  background-color: #2BE080;
+}
+
 
 .movies-card__button:hover {
   transform: rotateZ(20deg);
@@ -72,4 +80,10 @@
 
 .movies-card__image:hover {
   transform: scale(1.2);
+}
+
+@media (max-width: 770px) {
+  .movies-card__image {
+    max-width: 340px;
+  }
 }
