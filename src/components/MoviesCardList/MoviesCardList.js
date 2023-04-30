@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import { useMediaQuery } from "react-responsive";
 import MoviesCard from "../MoviesCard/MoviesCard";
-import Search from "../Search/Search";
+import SearchForm from "../SearchForm/SearchForm";
 import Switch from "../Switch/Switch";
 
 function MoviesCardList({ cards }) {
@@ -35,7 +35,7 @@ function MoviesCardList({ cards }) {
 
   return (
     <>
-      <Search />
+      <SearchForm />
       <div className="switch-box">
         <Switch isOn={value} handleToggle={() => setValue(!value)} />
         <span className="switch-box__label">Короткометражки</span>

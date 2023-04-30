@@ -1,4 +1,3 @@
-import { useState } from 'react';
 import { Routes, Route } from 'react-router-dom';
 import { useLocation } from 'react-router-dom';
 import Main from '../Main/Main';
@@ -7,14 +6,12 @@ import Register from '../Register/Register';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
-import Switch from '../Switch/Switch';
+import Profile from '../Profile/Profile';
 
 //только для верстки. Потом данные будут из api
 import { films } from '../../utils/constants';
 
 function App() {
-  const [value, setValue] = useState(false);
-
   const location = useLocation().pathname.slice(1);
 
   function isHeaderNeed() {
@@ -37,9 +34,7 @@ function App() {
         <Route path="/" element={<Main />} />
         <Route path="/signup" element={<Register />} />
         <Route path="/movies" element={<MoviesCardList cards={films} />} />
-        <Route path='/switch' element={
-          <Switch isOn={value} handleToggle={() => setValue(!value)} />
-        } />
+        <Route path='/profile' element={<Profile />} />
         <Route path="*" element={<NoMatch />} />
       </Routes>
       {isFooterNeed() && <Footer />}
