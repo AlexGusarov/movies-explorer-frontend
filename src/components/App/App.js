@@ -3,10 +3,12 @@ import { useLocation } from 'react-router-dom';
 import Main from '../Main/Main';
 import NoMatch from '../NoMatch/NoMatch';
 import Register from '../Register/Register';
+import Login from '../Login/Login';
 import MoviesCardList from '../MoviesCardList/MoviesCardList';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Profile from '../Profile/Profile';
+import './App.css';
 
 //только для верстки. Потом данные будут из api
 import { films } from '../../utils/constants';
@@ -33,6 +35,7 @@ function App() {
       <Routes>
         <Route path="/" element={<Main />} />
         <Route path="/signup" element={<Register />} />
+        <Route path="/signin" element={<Login />} />
         <Route path="/movies" element={<MoviesCardList cards={films} />} />
         <Route path='/profile' element={<Profile />} />
         <Route path="*" element={<NoMatch />} />

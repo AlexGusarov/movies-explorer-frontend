@@ -60,6 +60,10 @@
   color: #000000;
 }
 
+.profile__input:focus {
+  box-shadow: 0 0 3px 1px #708090;
+}
+
 .profile__input::placeholder {
   font-family: 'Inter', 'Arial', sans-serif;
   font-style: normal;

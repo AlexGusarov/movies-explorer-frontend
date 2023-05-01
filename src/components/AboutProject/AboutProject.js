@@ -1,4 +1,5 @@
 import SectionHeading from '../SectionHeading/SectionHeading';
+import './AboutProject.css';
 
 function AboutProject() {
   return (

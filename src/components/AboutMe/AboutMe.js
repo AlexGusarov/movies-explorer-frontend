@@ -2,6 +2,7 @@ import SectionHeading from '../SectionHeading/SectionHeading';
 import Portfolio from '../Portfolio/Portfolio';
 import avatar from '../../images/avatar.jpg';
 import { githubAddress } from '../../utils/constants';
+import './AboutMe.css';
 
 function AboutMe() {
   return (

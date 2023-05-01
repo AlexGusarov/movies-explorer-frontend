@@ -41,7 +41,7 @@ function Register() {
           </form>
           <div className="register__footer">
             <span className="register__question">Уже зарегистрированы?</span>
-            <Link to="/signin" className="register__link"> Войти</Link>
+            <Link to="/signin" className="register__link">Войти</Link>
           </div>
         </div>
       </div>

@@ -46,24 +46,32 @@ function Burger() {
             : 'burger-button__line'
         }></span>
       </div>
-      <ul className={
+      <dib className={
         isActive
-          ? 'burger__menu burger__menu_active'
-          : 'burger__menu'
+          ? 'burger__menu-container burger__menu-container_active'
+          : 'burger__menu-container'
       }>
-        <li className="burger__item">
-          <Link className="burger__link" to="">Главная</Link>
-        </li>
-        <li className="burger__item">
-          <Link className="burger__link" to="/movies">Фильмы</Link>
-        </li>
-        <li className="burger__item">
-          <Link className="burger__link" to="/saved-movies">Сохраненные фильмы</Link>
-        </li>
-        <li className="burger__item">
-          <Link className="burger__link" to="">{<ProfileButton />}</Link>
-        </li>
-      </ul>
+        <ul className={
+          isActive
+            ? 'burger__menu burger__menu_active'
+            : 'burger__menu'
+        }>
+          <li className="burger__item">
+            <Link className="burger__link" to="">Главная</Link>
+          </li>
+          <li className="burger__item">
+            <Link className="burger__link" to="/movies">Фильмы</Link>
+          </li>
+          <li className="burger__item">
+            <Link className="burger__link" to="/saved-movies">Сохраненные фильмы</Link>
+          </li>
+          <li className="burger__item">
+            <Link className="burger__link" to="">{<ProfileButton />}</Link>
+          </li>
+        </ul>
+
+      </dib>
+
     </>
   )
 };

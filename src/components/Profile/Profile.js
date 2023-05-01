@@ -3,6 +3,7 @@ import './Profile.css';
 function Profile() {
   return (
     <section className='profile'>
+      {/* На следующем этапе в заголовок будут приходить данные пользователя*/}
       <h1 className='profile__greeting'>Привет, Виталий!</h1>
       <form className='profile__form'>
         <div className='profile__form-container'>
