@@ -1,3 +1,5 @@
+import './SectionHeading.css';
+
 function SectionHeading({ text }) {
   return (
     <h2 className="section-heading">{text}</h2>

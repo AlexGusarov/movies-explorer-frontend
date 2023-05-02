@@ -1,3 +1,4 @@
+import './NoMatch.css';
 import { useNavigate } from 'react-router-dom';
 
 function NoMatch() {

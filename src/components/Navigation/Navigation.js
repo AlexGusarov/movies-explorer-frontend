@@ -2,7 +2,7 @@ import { Link } from 'react-router-dom';
 import { useMediaQuery } from "react-responsive";
 import ProfileButton from '../ProfileButton/ProfileButton';
 import Burger from '../Burger/Burger';
-
+import './Navigation.css';
 
 function Navigation({ loggedIn }) {
 

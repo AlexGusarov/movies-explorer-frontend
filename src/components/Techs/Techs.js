@@ -1,4 +1,5 @@
 import SectionHeading from '../SectionHeading/SectionHeading';
+import './Techs.css';
 
 function Techs() {
   return (

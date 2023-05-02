@@ -3,6 +3,7 @@ import { useMediaQuery } from "react-responsive";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import SearchForm from "../SearchForm/SearchForm";
 import Switch from "../Switch/Switch";
+import './MoviesCardList.css';
 
 function MoviesCardList({ cards }) {
   const isDesktopOrLaptop = useMediaQuery({ minWidth: 1224 })
@@ -31,7 +32,7 @@ function MoviesCardList({ cards }) {
       setCardQuantity(8)
     }
     setShownCards(cards.slice(0, cardQuantity))
-  }, [cards, cardQuantity, isDesktopOrLaptop, isTabletOrMobile]);
+  }, [cardQuantity, isDesktopOrLaptop, isTabletOrMobile]);
 
   return (
     <>
