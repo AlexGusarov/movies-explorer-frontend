@@ -1,10 +1,7 @@
 import './Burger.css';
-import { useRef } from 'react';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import ProfileButton from '../ProfileButton/ProfileButton';
-import { сlickOutside } from '../../utils/hooks';
-
 
 function Burger() {
   const [isActive, setIsActive] = useState(false);
@@ -18,9 +15,11 @@ function Burger() {
     }
   }
 
-  //закрыть кликом вне меню
-  const burgerRef = useRef(null);
-  сlickOutside(burgerRef, () => setIsActive(false));
+  function handleCloseMenu(evt) {
+    if (evt.target.classList.contains('burger__link') || evt.target.classList.contains('burger__menu-container_active')) {
+      setIsActive(false);
+    }
+  }
 
   return (
     <>
@@ -29,7 +28,8 @@ function Burger() {
           ? 'burger-button burger-button_active'
           : 'burger-button'
       } onClick={toggleBurger}
-        ref={burgerRef}>
+
+      >
         <span className={
           isActive
             ? 'burger-button__line burger-button__line_active'
@@ -46,7 +46,7 @@ function Burger() {
             : 'burger-button__line'
         }></span>
       </div>
-      <dib className={
+      <div className={
         isActive
           ? 'burger__menu-container burger__menu-container_active'
           : 'burger__menu-container'
@@ -55,23 +55,35 @@ function Burger() {
           isActive
             ? 'burger__menu burger__menu_active'
             : 'burger__menu'
-        }>
+        }
+          onClick={handleCloseMenu}
+        >
           <li className="burger__item">
-            <Link className="burger__link" to="">Главная</Link>
+            <NavLink
+              to="/"
+              // activeClassName="burger__link_active"
+              className="burger__link" >Главная</NavLink>
           </li>
           <li className="burger__item">
-            <Link className="burger__link" to="/movies">Фильмы</Link>
+            <NavLink
+              to="/movies"
+              // activeClassName="burger__link_active"
+              className="burger__link" >Фильмы</NavLink>
           </li>
           <li className="burger__item">
-            <Link className="burger__link" to="/saved-movies">Сохраненные фильмы</Link>
+            <NavLink
+              to="/saved-movies"
+              // activeClassName="burger__link_active"
+              className="burger__link" >Сохраненные фильмы</NavLink>
           </li>
           <li className="burger__item">
-            <Link className="burger__link" to="">{<ProfileButton />}</Link>
+            <NavLink
+              to="/profile"
+              // activeClassName="burger__link_active"
+              className="burger__link" >{<ProfileButton />}</NavLink>
           </li>
         </ul>
-
-      </dib>
-
+      </div>
     </>
   )
 };

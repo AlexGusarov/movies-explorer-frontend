@@ -107,6 +107,11 @@
   text-decoration: none;
 }
 
+.register__link:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
 .register__error {
   font-family: 'Inter', 'Helvetica Neue', 'Arial', sans-serif;
   font-style: normal;

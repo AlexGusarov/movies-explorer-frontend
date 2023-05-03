@@ -36,7 +36,13 @@
   border-radius: 48px;
   border: none;
   margin: 0 0 13px;
+  transition: all 0.2;
 
+}
+
+.search__button {
+  cursor: pointer;
+  transform: scale(1.1);
 }
 
 

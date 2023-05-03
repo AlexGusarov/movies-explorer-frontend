@@ -99,6 +99,15 @@
   line-height: 1.22;
 }
 
+.burger__link_active {
+  border-bottom: 2px solid #000;
+}
+
+.burger__link:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
 .burger__item:last-child {
   margin-top: auto;
 }

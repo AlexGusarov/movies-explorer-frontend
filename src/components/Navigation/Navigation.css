@@ -13,6 +13,11 @@
   align-self: center;
 }
 
+.navigation__link:hover {
+  opacity: 0.6;
+  cursor: pointer;
+}
+
 .navigation__link_logged-in {
   font-weight: 500;
   font-size: 12px;
