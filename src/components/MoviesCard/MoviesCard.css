@@ -78,7 +78,7 @@
 }
 
 .movies-card__image {
-  max-width: 364px;
+  width: 100%;
   max-height: 203px;
   transition: all 0.5s;
   cursor: pointer;

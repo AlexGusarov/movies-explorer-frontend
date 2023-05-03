@@ -61,26 +61,30 @@ function Burger() {
           <li className="burger__item">
             <NavLink
               to="/"
-              // activeClassName="burger__link_active"
-              className="burger__link" >Главная</NavLink>
+              className={({ isActive }) =>
+                isActive ? "burger__link burger__link_active" : "burger__link"
+              } >Главная</NavLink>
           </li>
           <li className="burger__item">
             <NavLink
               to="/movies"
-              // activeClassName="burger__link_active"
-              className="burger__link" >Фильмы</NavLink>
+              className={({ isActive }) =>
+                isActive ? "burger__link burger__link_active" : "burger__link"
+              }>Фильмы</NavLink>
           </li>
           <li className="burger__item">
             <NavLink
               to="/saved-movies"
-              // activeClassName="burger__link_active"
-              className="burger__link" >Сохраненные фильмы</NavLink>
+              className={({ isActive }) =>
+                isActive ? "burger__link burger__link_active" : "burger__link"
+              }>Сохраненные фильмы</NavLink>
           </li>
           <li className="burger__item">
             <NavLink
               to="/profile"
-              // activeClassName="burger__link_active"
-              className="burger__link" >{<ProfileButton />}</NavLink>
+              className={({ isActive }) =>
+                isActive ? "burger__link burger__link_active" : "burger__link"
+              }>{<ProfileButton />}</NavLink>
           </li>
         </ul>
       </div>
