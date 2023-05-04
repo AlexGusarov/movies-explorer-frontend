@@ -1,7 +1,7 @@
 import './Burger.css';
 import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
-import ProfileButton from '../ProfileButton/ProfileButton';
+import ProfileIcon from '../ProfileIcon/ProfileIcon';
 
 function Burger() {
   const [isActive, setIsActive] = useState(false);
@@ -16,9 +16,12 @@ function Burger() {
   }
 
   function handleCloseMenu(evt) {
-    if (evt.target.classList.contains('burger__link') || evt.target.classList.contains('burger__menu-container_active')) {
-      setIsActive(false);
-    }
+    // evt.preventDefault();
+    setIsActive(false);
+
+    // if (evt.target.classList.contains('burger__link')) {
+    //   setIsActive(false);
+    // }
   }
 
   return (
@@ -27,9 +30,8 @@ function Burger() {
         isActive
           ? 'burger-button burger-button_active'
           : 'burger-button'
-      } onClick={toggleBurger}
-
-      >
+      }
+        onClick={toggleBurger}>
         <span className={
           isActive
             ? 'burger-button__line burger-button__line_active'
@@ -82,9 +84,10 @@ function Burger() {
           <li className="burger__item">
             <NavLink
               to="/profile"
-              className={({ isActive }) =>
-                isActive ? "burger__link burger__link_active" : "burger__link"
-              }>{<ProfileButton />}</NavLink>
+              // onClick={handleCloseMenu}
+              className="burger__link">
+              {<ProfileIcon />}
+            </NavLink>
           </li>
         </ul>
       </div>

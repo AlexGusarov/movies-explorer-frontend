@@ -23,8 +23,9 @@
   font-weight: 500;
   font-size: 13px;
   line-height: 1.23;
-  text-decoration-line: underline;
+  border-bottom: 2px solid #ffffff;
   color: #FFFFFF;
+  text-decoration: none;
 }
 
 .navtab__link:hover {

@@ -1,4 +1,6 @@
-.profile-button {
+.profile-icon {
+  display: flex;
+  align-items: center;
   width: 100px;
   height: 32px;
   background: #FFFFFF;
@@ -9,6 +11,7 @@
   background-position: center right 3px;
   background-repeat: no-repeat;
   padding-left: 11px;
+  box-sizing: border-box;
   font-family: 'Inter', 'Arial', sans-serif;
   font-style: normal;
   font-weight: 500;

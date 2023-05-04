@@ -5,16 +5,33 @@ import SearchForm from "../SearchForm/SearchForm";
 import Switch from "../Switch/Switch";
 import './MoviesCardList.css';
 
-function MoviesCardList({ cards }) {
+function MoviesCardList({ cards, isButtonMoreNeed }) {
   const isDesktopOrLaptop = useMediaQuery({ minWidth: 1224 })
   const isTabletOrMobile = useMediaQuery({ maxWidth: 1224 })
+  const isMobile = useMediaQuery({ maxWidth: 649 })
 
   const [value, setValue] = useState(false);
   const [cardQuantity, setCardQuantity] = useState(12);
   const [shownCards, setShownCards] = useState(cards);
 
+
   function handleClickMore() {
-    setCardQuantity(cardQuantity + 3);
+    //количество карточек в ряду, которые добавляются кнопкой Ешё//
+    let addition;
+
+    if (isDesktopOrLaptop) {
+      addition = 3;
+    }
+
+    if (isTabletOrMobile) {
+      addition = 2;
+    }
+
+    if (isMobile) {
+      addition = 1;
+    }
+
+    setCardQuantity(cardQuantity + addition);
     setTimeout(() => {
       window.scrollBy({
         top: 320,
@@ -23,6 +40,7 @@ function MoviesCardList({ cards }) {
     }, 100)
   }
 
+  //отрисовка карточек в количестве, которое зависит от размера экрана
   useEffect(() => {
     if (isDesktopOrLaptop) {
       setCardQuantity(12)
@@ -31,8 +49,14 @@ function MoviesCardList({ cards }) {
     if (isTabletOrMobile) {
       setCardQuantity(8)
     }
+
+    if (isMobile) {
+      setCardQuantity(5)
+    }
+
     setShownCards(cards.slice(0, cardQuantity))
-  }, [cardQuantity, isDesktopOrLaptop, isTabletOrMobile]);
+  }, [cards, cardQuantity, isDesktopOrLaptop, isTabletOrMobile, isMobile]);
+
 
   return (
     <>
@@ -48,7 +72,9 @@ function MoviesCardList({ cards }) {
             <MoviesCard props={item} {...item} key={`${index}`} />
           ))}
         </ul>
-        <button className="movies-card-list__button-more" onClick={handleClickMore}>Ещё</button>
+        {isButtonMoreNeed &&
+          <button className="movies-card-list__button-more"
+            onClick={handleClickMore}>Ещё</button>}
       </section>
     </>
   )

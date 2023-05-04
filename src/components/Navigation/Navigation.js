@@ -1,6 +1,6 @@
 import { Link } from 'react-router-dom';
 import { useMediaQuery } from "react-responsive";
-import ProfileButton from '../ProfileButton/ProfileButton';
+import ProfileIcon from '../ProfileIcon/ProfileIcon';
 import Burger from '../Burger/Burger';
 import './Navigation.css';
 
@@ -27,7 +27,7 @@ function Navigation({ loggedIn }) {
                   <Link to="/saved-films" className="navigation__link navigation__link_logged-out">Сохраненные фильмы</Link>
                 </div>
                 <Link to="/sign-in" className="navigation__link navigation__link-profile">
-                  {<ProfileButton />}
+                  {<ProfileIcon />}
                 </Link>
               </>
             )}
