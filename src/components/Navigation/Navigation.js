@@ -24,9 +24,9 @@ function Navigation({ loggedIn }) {
               <>
                 <div className='navigation__link-wrapper'>
                   <Link to="/movies" className="navigation__link navigation__link_logged-out">Фильмы</Link>
-                  <Link to="/saved-films" className="navigation__link navigation__link_logged-out">Сохраненные фильмы</Link>
+                  <Link to="/saved-movies" className="navigation__link navigation__link_logged-out">Сохраненные фильмы</Link>
                 </div>
-                <Link to="/sign-in" className="navigation__link navigation__link-profile">
+                <Link to="/profile" className="navigation__link navigation__link-profile">
                   {<ProfileIcon />}
                 </Link>
               </>
