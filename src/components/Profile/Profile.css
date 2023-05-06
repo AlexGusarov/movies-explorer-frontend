@@ -27,7 +27,6 @@
   width: 410px;
   height: 50%;
   display: grid;
-  border: 1px solid #708090;
   grid-template-columns: 1fr 2fr;
   grid-template-areas:
     "name input-name"

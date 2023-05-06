@@ -15,7 +15,7 @@ function Profile() {
             <input className='profile__input profile__input_email' id='email' type='email' placeholder='E-mail'></input>
           </div>
         </div>
-        <button className='profile__button-edit'>Редактировать</button>
+        <button className='profile__button-edit' type='submit'>Редактировать</button>
         <button className='profile__button-exit'>Выйти из аккаунта</button>
       </form>
     </section>

@@ -79,7 +79,7 @@
   background: #3456F3;
   border-radius: 3px;
   border: none;
-  margin: 69px 0 0;
+  margin: 149px 0 0;
 }
 
 .login__footer {
@@ -154,5 +154,9 @@
 
   .login__link {
     font-size: 12px;
+  }
+
+  .login__submit {
+    margin: 235px 0 0;
   }
 }
