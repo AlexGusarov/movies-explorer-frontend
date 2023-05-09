@@ -7,12 +7,29 @@ function Profile() {
       <h1 className='profile__greeting'>Привет, Виталий!</h1>
       <form className='profile__form'>
         <div className='profile__form-container'>
-          <label className='profile__label profile__label_name' htmlFor='name'>Имя</label>
-          <div className='profile__input-container profile__input-container_name'>
-            <input className='profile__input profile__input_name' id='name' type='text' placeholder='Имя'></input>          </div>
-          <label className='profile__label profile__label_email' htmlFor='email'>E-mail</label>
-          <div className='profile__input-container profile__input-container_email'>
-            <input className='profile__input profile__input_email' id='email' type='email' placeholder='E-mail'></input>
+          <label
+            htmlFor='name'
+            className='profile__label
+                      profile__label_place_name'>Имя</label>
+          <div
+            className='profile__input-container 
+                      profile__input-container_place_name'>
+            <input className='profile__input 
+                              profile__input_place_name'
+              id='name'
+              type='text'
+              placeholder='Имя'></input>
+          </div>
+          <label className='profile__label
+                            profile__label_place_email'
+            htmlFor='email'>E-mail</label>
+          <div className='profile__input-container 
+                          profile__input-container_place_email'>
+            <input className='profile__input
+                              profile__input_place_email'
+              id='email'
+              type='email'
+              placeholder='E-mail'></input>
           </div>
         </div>
         <button className='profile__button-edit' type='submit'>Редактировать</button>

@@ -80,6 +80,11 @@
   border-radius: 3px;
   border: none;
   margin: 149px 0 0;
+  cursor: pointer;
+}
+
+.login__submit:hover {
+  opacity: 0.6;
 }
 
 .login__footer {

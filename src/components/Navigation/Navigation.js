@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+import { NavLink, Link } from 'react-router-dom';
 import { useMediaQuery } from "react-responsive";
 import ProfileIcon from '../ProfileIcon/ProfileIcon';
 import Burger from '../Burger/Burger';
@@ -14,8 +14,8 @@ function Navigation({ loggedIn }) {
       {(!loggedIn)
         ?
         <>
-          <Link to="/sign-up" className="navigation__link navigation__link_logged-in">Регистрация</Link>
-          <Link to="/sign-in" className="navigation__link navigation__link_button">Войти</Link>
+          <Link to="/signup" className="navigation__link navigation__link_state_logged-in">Регистрация</Link>
+          <Link to="/signin" className="navigation__link navigation__link_type_button">Войти</Link>
         </>
         :
         <>
@@ -23,8 +23,16 @@ function Navigation({ loggedIn }) {
             {isDesktopOrLaptop && (
               <>
                 <div className='navigation__link-wrapper'>
-                  <Link to="/movies" className="navigation__link navigation__link_logged-out">Фильмы</Link>
-                  <Link to="/saved-movies" className="navigation__link navigation__link_logged-out">Сохраненные фильмы</Link>
+                  <NavLink to="/movies" className={({ isActive }) =>
+                    isActive
+                      ? "navigation__link navigation__link_state_logged-out navigation__link_active"
+                      : "navigation__link navigation__link_state_logged-out"
+                  }>Фильмы</NavLink>
+                  <NavLink to="/saved-movies" className={({ isActive }) =>
+                    isActive
+                      ? "navigation__link navigation__link_state_logged-out navigation__link_active"
+                      : "navigation__link navigation__link_state_logged-out"
+                  }>Сохраненные фильмы</NavLink>
                 </div>
                 <Link to="/profile" className="navigation__link navigation__link-profile">
                   {<ProfileIcon />}

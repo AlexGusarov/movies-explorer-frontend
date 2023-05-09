@@ -18,3 +18,10 @@
     padding: 0 0 18px;
   }
 }
+
+@media (max-width: 500px) {
+  .section-heading {
+    font-size: 18px;
+    padding: 0 0 28px;
+  }
+}

@@ -2,9 +2,10 @@
   display: flex;
   flex-direction: column;
   max-width: 364px;
-  min-height: 217px;
+  min-height: 271px;
   background: #FDFDFD;
   box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
+  justify-self: center;
 }
 
 .movies-card__container {
@@ -78,10 +79,14 @@
 }
 
 .movies-card__image {
+  /* width: 100%;
+  max-height: 203px;
+  min-height: 190px;
+  transition: all 0.5s;
+  cursor: pointer; */
   width: 100%;
   max-height: 203px;
-  transition: all 0.5s;
-  cursor: pointer;
+  object-fit: cover;
 }
 
 .movies-card__image:hover {

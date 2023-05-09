@@ -6,7 +6,7 @@ import './Header.css';
 function Header({ loggedIn }) {
 
   return (
-    <header className={!loggedIn ? 'header header_main' : 'header'}>
+    <header className={!loggedIn ? 'header header_place_main' : 'header'}>
       <Logo />
       <Navigation loggedIn={loggedIn} />
     </header>

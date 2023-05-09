@@ -1,5 +1,5 @@
 .about-project {
-  padding: 110px 70px;
+  padding: 144px 70px 74px;
   background-color: #fff;
   box-sizing: border-box;
 }
@@ -32,6 +32,9 @@
 }
 
 .about-project__list-text {
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-style: normal;
+  font-weight: 400;
   font-size: 14px;
   line-height: 1.43;
   margin: 0;
@@ -64,6 +67,7 @@
   flex-grow: 1;
   background-color: #2BE080;
   max-width: 228px;
+  min-width: 100px;
 }
 
 .about-project__week:last-child {
@@ -92,6 +96,7 @@
 .about-project__stage:first-child {
   flex-grow: 1;
   max-width: 228px;
+  min-width: 100px;
 }
 
 .about-project__stage:last-child {
@@ -136,6 +141,26 @@
   }
 
   .about-project__timeline {
-    margin-top: 60px;
+    margin-top: 55px;
+  }
+}
+
+@media (max-width: 500px) {
+  .about-project {
+    padding: 70px 18px;
+  }
+
+  .about-project__list-title {
+    padding: 0 0 16px;
+  }
+
+  .about-project__list-text {
+    font-size: 12px;
+  }
+
+  .about-project__week,
+  .about-project__stage {
+    font-size: 11px;
+    line-height: 1.18;
   }
 }

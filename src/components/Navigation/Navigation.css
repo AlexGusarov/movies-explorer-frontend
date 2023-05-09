@@ -11,6 +11,7 @@
   color: #FFFFFF;
   text-decoration: none;
   align-self: center;
+  font-weight: 400;
 }
 
 .navigation__link:hover {
@@ -18,21 +19,24 @@
   cursor: pointer;
 }
 
-.navigation__link_logged-in {
+.navigation__link_active {
+  font-weight: 500;
+}
+
+.navigation__link_state_logged-in {
   font-weight: 500;
   font-size: 12px;
   line-height: 1.33;
 }
 
-.navigation__link_logged-out {
-  font-weight: 400;
+.navigation__link_state_logged-out {
   font-size: 13px;
   line-height: 1.38;
   text-align: right;
   color: #000000;
 }
 
-.navigation__link_button {
+.navigation__link_type_button {
   display: flex;
   width: 76px;
   height: 32px;
@@ -51,7 +55,7 @@
 }
 
 .navigation__links-container {
-  width: 100%;
+  width: 90%;
   display: flex;
   justify-content: flex-end;
 }
@@ -68,15 +72,21 @@
 
 @media (max-width: 680px) {
 
-  .navigation__link_logged-in {
+  .navigation__link_state_logged-in {
     font-size: 10px;
     line-height: 1.6;
   }
 
-  .navigation__link_button {
+  .navigation__link_type_button {
     width: 54px;
     height: 26px;
     font-size: 10px;
     line-height: 1.6;
+  }
+}
+
+@media (max-width: 500px) {
+  .navigation {
+    gap: 14px;
   }
 }

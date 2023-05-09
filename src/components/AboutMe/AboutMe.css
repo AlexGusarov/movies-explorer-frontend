@@ -145,3 +145,9 @@
     justify-self: center;
   }
 }
+
+@media (max-width: 500px) {
+  .about-me__photo {
+    width: 100%;
+  }
+}

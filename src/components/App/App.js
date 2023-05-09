@@ -33,16 +33,18 @@ function App() {
   return (
     <div className='root'>
       {isHeaderNeed() && <Header loggedIn={isLoggedIn} />}
-      <Routes>
-        <Route path="/" element={<Main />} />
-        <Route path="/signup" element={<Register />} />
-        <Route path="/signin" element={<Login />} />
-        {/* // для этапа верстки, затем cards и savedCards будут приходить из запросов// */}
-        <Route path="/movies" element={<MoviesCardList cards={films} isButtonMoreNeed={true} />} />
-        <Route path="/saved-movies" element={<SavedMovies savedCards={savedCards} />} />
-        <Route path='/profile' element={<Profile />} />
-        <Route path="*" element={<NoMatch />} />
-      </Routes>
+      <main>
+        <Routes>
+          <Route path="/" element={<Main />} />
+          <Route path="/signup" element={<Register />} />
+          <Route path="/signin" element={<Login />} />
+          {/* // для этапа верстки, затем cards и savedCards будут приходить из запросов// */}
+          <Route path="/movies" element={<MoviesCardList cards={films} isButtonMoreNeed={true} />} />
+          <Route path="/saved-movies" element={<SavedMovies savedCards={savedCards} />} />
+          <Route path='/profile' element={<Profile />} />
+          <Route path="*" element={<NoMatch />} />
+        </Routes>
+      </main>
       {isFooterNeed() && <Footer />}
     </div>
   )

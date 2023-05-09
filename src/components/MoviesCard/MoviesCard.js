@@ -19,7 +19,10 @@ function MoviesCard(props) {
         </div>
         <button className={`movies-card__button ${saved ? 'movies-card__button_saved' : ''}`} aria-label="Save" onClick={handleClick} />
       </div>
-      <a href={props.trailerLink} className="movies-card__link">
+      <a href={props.trailerLink}
+        rel="noreferrer"
+        target="_blank"
+        className="movies-card__link">
         <img className="movies-card__image" src={props.image} alt="Cмотреть трейлер фильма" />
       </a>
     </li>

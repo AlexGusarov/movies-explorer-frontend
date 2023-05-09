@@ -8,11 +8,11 @@
   box-sizing: border-box;
 }
 
-.header_main {
+.header_place_main {
   background-color: #073042;
 }
 
-@media (max-width: 770px) {
+@media (max-width: 900px) {
   .header {
     padding: 0 30px;
   }
