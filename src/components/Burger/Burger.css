@@ -9,6 +9,11 @@
   cursor: pointer;
 }
 
+.burger-button:hover {
+  opacity: 0.6;
+}
+
+
 .burger-button_active {
   position: fixed;
   top: 22px;
@@ -106,7 +111,7 @@
 }
 
 .burger__link:hover {
-  opacity: 0.6;
+  opacity: 0.7;
   cursor: pointer;
 }
 

@@ -24,8 +24,6 @@
   margin: 40px 0 40px;
 }
 
-.login__form {}
-
 .login__label {
   display: inline-block;
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
@@ -59,6 +57,7 @@
 .login__input:focus {
   box-shadow: 0 0 3px 1px #708090;
   font-weight: 500;
+  border-radius: 10px;
 }
 
 .login__input-error {
@@ -84,7 +83,7 @@
 }
 
 .login__submit:hover {
-  opacity: 0.6;
+  opacity: 0.8;
 }
 
 .login__footer {
@@ -115,7 +114,7 @@
 }
 
 .login__link:hover {
-  opacity: 0.6;
+  opacity: 0.7;
   cursor: pointer;
 }
 
@@ -141,7 +140,7 @@
 
 @media (max-width: 550px) {
   .login {
-    padding: 56px 0 0;
+    padding: 56px 0 30px;
   }
 
   .login__container {
@@ -162,6 +161,10 @@
   }
 
   .login__submit {
-    margin: 235px 0 0;
+    margin: 230px 0 0;
+  }
+
+  .login__footer {
+    margin: 14px auto 0;
   }
 }

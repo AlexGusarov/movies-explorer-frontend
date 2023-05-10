@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import './MoviesCard.css';
+import '../Tooltip/Tooltip.css';
 import minToHours from '../../utils/minToHours';
 
 function MoviesCard(props) {
@@ -17,12 +18,18 @@ function MoviesCard(props) {
           <p className="movies-card__name">{props.nameRU}</p>
           <span className="movies-card__duration">{minToHours(props.duration)}</span>
         </div>
-        <button className={`movies-card__button ${saved ? 'movies-card__button_saved' : ''}`} aria-label="Save" onClick={handleClick} />
+        <button
+          className={`movies-card__button ${saved ? 'movies-card__button_saved' : ''}`}
+          aria-label="Сохранить"
+          onClick={handleClick}
+        />
       </div>
       <a href={props.trailerLink}
         rel="noreferrer"
         target="_blank"
-        className="movies-card__link">
+        className="movies-card__link"
+        data-tooltip="Смотреть трейлер"
+      >
         <img className="movies-card__image" src={props.image} alt="Cмотреть трейлер фильма" />
       </a>
     </li>

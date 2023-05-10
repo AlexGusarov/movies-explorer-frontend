@@ -17,6 +17,7 @@ function Register() {
               type="text"
               name="name"
               id="name"
+              required
             >
             </input>
             <span className="register__error register__error_visible"></span>
@@ -26,6 +27,7 @@ function Register() {
               type="email"
               name="email"
               id="email"
+              required
             >
             </input>
             <label className="register__label" htmlFor="password">Пароль</label>
@@ -34,6 +36,7 @@ function Register() {
               type="password"
               name="password"
               id="password"
+              required
             >
             </input>
             <span className="register__error register__error_visible">Что-то пошло не так...</span>

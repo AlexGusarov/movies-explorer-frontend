@@ -57,6 +57,7 @@
 .register__input:focus {
   box-shadow: 0 0 3px 1px #708090;
   font-weight: 500;
+  border-radius: 10px;
 }
 
 .register__input:last-of-type {
@@ -81,6 +82,11 @@
   border-radius: 3px;
   border: none;
   margin: 69px 0 0;
+  cursor: pointer;
+}
+
+.register__submit:hover {
+  opacity: 0.8;
 }
 
 .register__footer {
@@ -111,7 +117,7 @@
 }
 
 .register__link:hover {
-  opacity: 0.6;
+  opacity: 0.7;
   cursor: pointer;
 }
 
@@ -137,7 +143,7 @@
 
 @media (max-width: 550px) {
   .register {
-    padding: 56px 0 0;
+    padding: 56px 0 30px;
   }
 
   .register__container {
@@ -159,5 +165,10 @@
 
   .register__submit {
     margin: 157px 0 0;
+    font-size: 12px;
+  }
+
+  .register__footer {
+    margin: 14px auto 0;
   }
 }

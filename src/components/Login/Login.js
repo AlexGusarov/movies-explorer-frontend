@@ -17,6 +17,7 @@ function Login() {
               type="email"
               name="email"
               id="email"
+              required
             >
             </input>
             <label className="login__label" htmlFor="password">Пароль</label>
@@ -25,6 +26,7 @@ function Login() {
               type="password"
               name="password"
               id="password"
+              required
             >
             </input>
             <span className="login__error login__error_visible">Что-то пошло не так...</span>

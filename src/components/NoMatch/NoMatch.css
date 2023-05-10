@@ -45,8 +45,12 @@
   background-color: #fff;
   border: none;
   margin: auto 0 60px;
+  cursor: pointer;
 }
 
+.no-match__button:hover {
+  opacity: 0.8;
+}
 
 @media(max-width: 680px) {
   .no-match__code {
