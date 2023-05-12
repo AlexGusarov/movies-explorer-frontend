@@ -1,0 +1,23 @@
+.profile-icon {
+  display: flex;
+  align-items: center;
+  width: 100px;
+  height: 32px;
+  background: #FFFFFF;
+  box-shadow: 0px 3px 14px rgba(0, 0, 0, 0.08);
+  border-radius: 40px;
+  border: none;
+  background-image: url('../../images/profile-icon.svg');
+  background-position: center right 3px;
+  background-repeat: no-repeat;
+  padding-left: 11px;
+  box-sizing: border-box;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-style: normal;
+  font-weight: 500;
+  font-size: 13px;
+  line-height: 0.92;
+  color: #000000;
+  text-align: start;
+  cursor: pointer;
+}
