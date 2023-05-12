@@ -17,6 +17,7 @@ function Register() {
               type="text"
               name="name"
               id="name"
+              placeholder="Иван Петров"
               required
             >
             </input>
@@ -27,6 +28,7 @@ function Register() {
               type="email"
               name="email"
               id="email"
+              placeholder="ivpetrov@ya.ru"
               required
             >
             </input>

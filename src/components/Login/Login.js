@@ -17,6 +17,7 @@ function Login() {
               type="email"
               name="email"
               id="email"
+              placeholder='ipetrov@ya.ru'
               required
             >
             </input>

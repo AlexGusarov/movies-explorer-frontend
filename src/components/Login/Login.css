@@ -44,7 +44,7 @@
   font-style: normal;
   font-weight: 400;
   font-size: 13px;
-  line-height: 1, 23;
+  line-height: 1.23;
   color: #000000;
   background: #F9F9F9;
   border-radius: 8px;
@@ -58,6 +58,14 @@
   box-shadow: 0 0 3px 1px #708090;
   font-weight: 500;
   border-radius: 10px;
+}
+
+.login__input::placeholder {
+  font-family: 'Inter', 'Helvetica Neue', 'Arial', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 11px;
+  line-height: 1.23;
 }
 
 .login__input-error {

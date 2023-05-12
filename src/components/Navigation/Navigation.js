@@ -1,4 +1,5 @@
 import { NavLink, Link } from 'react-router-dom';
+import { HashLink } from 'react-router-hash-link';
 import { useMediaQuery } from "react-responsive";
 import ProfileIcon from '../ProfileIcon/ProfileIcon';
 import Burger from '../Burger/Burger';
@@ -14,8 +15,8 @@ function Navigation({ loggedIn }) {
       {(!loggedIn)
         ?
         <>
-          <Link to="/signup" className="navigation__link navigation__link_state_logged-in">Регистрация</Link>
-          <Link to="/signin" className="navigation__link navigation__link_type_button">Войти</Link>
+          <HashLink smooth to="/signup/#logo" className="navigation__link navigation__link_state_logged-in">Регистрация</HashLink>
+          <HashLink to="/signin/#logo" className="navigation__link navigation__link_type_button">Войти</HashLink>
         </>
         :
         <>

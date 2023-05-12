@@ -5,7 +5,7 @@ import './Logo.css';
 function Logo() {
   return (
     <HashLink smooth to="/#project">
-      <img src={logo} alt="Логотип" className="logo" />
+      <img src={logo} alt="Логотип" className="logo" id="logo" />
     </HashLink>
   )
 };
