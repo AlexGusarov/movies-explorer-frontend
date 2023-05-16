@@ -30,7 +30,7 @@ function MoviesCard(props) {
         className="movies-card__link"
         data-tooltip="Смотреть трейлер"
       >
-        <img className="movies-card__image" src={props.image} alt="Cмотреть трейлер фильма" />
+        <img className="movies-card__image" src={`https://api.nomoreparties.co/${props.image.url}`} alt="Cмотреть трейлер фильма" />
       </a>
     </li>
   )
