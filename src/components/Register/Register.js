@@ -5,10 +5,27 @@ import { signupForm } from "../../utils/formConfig";
 
 import './Register.css';
 
-function Register() {
+function Register({ onRegister }) {
 
-  const { renderFormInputs, isFormValid } = useForm(signupForm);
+  const { renderFormInputs, isFormValid, form } = useForm(signupForm);
   // изменить количество инпутов и параметры валидации можно в /utils/formConfig
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    if (!name || !email || !password) {
+      return;
+    }
+    console.log('registration data: ', name, email, password);
+    onRegister(name, email, password);
+
+    // makeFormClear();
+    evt.target.reset();
+  }
 
   return (
     <>
@@ -16,7 +33,7 @@ function Register() {
         <div className="register__container">
           <Logo />
           <p className="register__title">Добро пожаловать!</p>
-          <form className="register__form" onSubmit={() => console.log('submitted')}>
+          <form className="register__form" onSubmit={handleSubmit}>
             {renderFormInputs()}
             <button type="submit" className="register__submit" disabled={!isFormValid()}>Зарегистрироваться</button>
           </form>

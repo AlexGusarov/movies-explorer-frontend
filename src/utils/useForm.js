@@ -2,6 +2,14 @@ import { useState, useCallback } from "react";
 
 function useForm(formObj) {
   const [form, setForm] = useState(formObj);
+  const [values, setValues] = useState({});
+
+  const handleChange = (evt) => {
+    const input = evt.target;
+    const value = input.value;
+    const name = input.name;
+    setValues({ ...values, [name]: value });
+  };
 
   function renderFormInputs() {
     return Object.values(form).map((inputObj) => {
@@ -51,11 +59,7 @@ function useForm(formObj) {
     [form, isInputFieldValid]
   );
 
-  /**
-   * returns boolean value indicating whether overall form is valid
-   *
-   * @param {object} formObj - object representation of a form
-   */
+
   const isFormValid = useCallback(() => {
     let isValid = true;
     const arr = Object.values(form);
@@ -70,7 +74,7 @@ function useForm(formObj) {
     return isValid;
   }, [form]);
 
-  return { renderFormInputs, isFormValid };
+  return { renderFormInputs, isFormValid, form };
 }
 
 export default useForm;
