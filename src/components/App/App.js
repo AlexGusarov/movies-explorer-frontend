@@ -11,9 +11,9 @@ import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Profile from '../Profile/Profile';
 import Preloader from '../Preloader/Preloader';
-import InfoTooltip from '../InfoTooltip/InfoTooltip';
 import { register, authorize, checkToken } from "../../utils/auth";
 import { errorMessages } from '../../utils/constants';
+import SearchForm from '../SearchForm/SearchForm';
 
 import './App.css';
 
@@ -24,11 +24,11 @@ function App() {
   const [loggedIn, setLoggedIn] = useState(false);
   const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
-  const [isInfoTooltipOpen, setIsInfoTooltipOpen] = useState(false);
-  const [infoTooltipStatus, setInfoTooltipStatus] = useState("");
-  const [infoTooltipMessage, setInfoTooltipMessage] = useState("");
+  const [isError, setIsError] = useState(false);
+  const [errorTooltipMessage, setErrorTooltipMessage] = useState("");
   const [registerStatus, setRegisterStatus] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
+
 
 
   function isHeaderNeed() {
@@ -46,68 +46,97 @@ function App() {
       setLoading(true);
       const data = await register(name, email, password);
       if (data) {
-        setIsInfoTooltipOpen(true);
-        setInfoTooltipStatus('ok');
         setRegisterStatus(true);
 
         navigate('/signin');
       }
     } catch (err) {
-      setIsInfoTooltipOpen(true);
-      setInfoTooltipStatus('failed');
+
       setRegisterStatus(false);
 
       const { codeConflict, conflict, registerMistake } = errorMessages;
       const message = err.includes(codeConflict) ? conflict : registerMistake;
-      setInfoTooltipMessage(message);
+      console.log(message);
+      setErrorTooltipMessage(message);
+      setIsError(true);
     }
     finally {
       setLoading(false);
     }
   }, [])
 
-  const closeInfoTooltip = () => setIsInfoTooltipOpen(false);
+  const enterAccount = useCallback(async (login, password) => {
+    try {
+      setLoading(true);
+      const data = await authorize(login, password);
+
+      if (!data) {
+        setIsError(true);
+        setErrorTooltipMessage(errorMessages.badRequest);
+        throw new Error('Неверные логин или пароль');
+      }
+      if (data.token) {
+        setLoggedIn(true);
+        localStorage.setItem('token', data.token);
+        console.log(data.token);
+      }
+    } catch (err) {
+      console.log(err)
+      setIsError(true);
+      setErrorTooltipMessage(errorMessages.badRequest);
+    }
+    finally {
+      setLoading(false)
+    }
+  }, []);
 
   //переключатель хэдера. Только для верстки, затем loggedIn будет из авторизации
   const isLoggedIn = (location === '') ? false : true;
 
-  //монтируем фильмы
-  useEffect(() => {
-    moviesApi.getAllMovies()
-      .then((res) => setMovies(res))
-      .catch((err) => {
-        console.log(`Произошла ошибка с получением данных карточек - ${err}`)
-      })
-  }, []);
+  // //монтируем фильмы
+  // useEffect(() => {
+  //   moviesApi.getAllMovies()
+  //     .then((res) => setMovies(res))
+  //     .catch((err) => {
+  //       console.log(`Произошла ошибка с получением данных карточек - ${err}`)
+  //     })
+  // }, []);
 
-  if (loading) {
-    return (
-      <Preloader />
-    )
-  }
+  // if (loading) {
+  //   return (
+  //     <Preloader />
+  //   )
+  // }
 
   return (
     <div className='root'>
       {isHeaderNeed() && <Header loggedIn={isLoggedIn} />}
       <main>
         <Routes>
+          <Route path="/search" element={<SearchForm />} />
           <Route path="/" element={<Main />} />
-          <Route path="/signup" element={<Register onRegister={registerUser} />} />
-          <Route path="/signin" element={<Login />} />
+          <Route path="/signup" element={
+            <Register
+              onRegister={registerUser}
+              isError={isError}
+              message={errorTooltipMessage}
+              isLoading={loading}
+            />} />
+          <Route path="/signin" element={
+            <Login
+              onLogin={enterAccount}
+              isError={isError}
+              message={errorTooltipMessage}
+              isLoading={loading}
+            />} />
           {/* // для этапа верстки, затем cards и savedCards будут приходить из запросов// */}
-          <Route path="/movies" element={<MoviesCardList cards={movies} isButtonMoreNeed={true} />} />
+          <Route path="/movies" element={<MoviesCardList isButtonMoreNeed={true} />} />
           {/* <Route path="/saved-movies" element={<SavedMovies savedCards={savedCards} />} /> */}
           <Route path='/profile' element={<Profile />} />
           <Route path="*" element={<NoMatch />} />
         </Routes>
       </main>
       {isFooterNeed() && <Footer />}
-      <InfoTooltip
-        onClose={closeInfoTooltip}
-        isOpen={isInfoTooltipOpen}
-        status={infoTooltipStatus}
-        errorMessage={infoTooltipMessage}
-      />
     </div>
   )
 };

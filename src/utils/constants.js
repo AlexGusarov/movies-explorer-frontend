@@ -5,7 +5,10 @@ export const BASE_URL = 'https://api.kapibar.nomoredomainsclub.ru';
 export const errorMessages = {
   codeConflict: 409,
   conflict: "Пользователь с таким email уже существует",
-  registerMistake: "При регистрации пользователя произошла ошибка"
+  registerMistake: "При регистрации пользователя произошла ошибка",
+  badRequest: "Вы ввели неправильный логин или пароль",
+
+
 }
 
 export const successMessages = {

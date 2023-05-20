@@ -5,6 +5,7 @@ import fail from "../../images/Union-fail.png";
 import { successMessages } from "../../utils/constants";
 
 function InfoToolTip({ isOpen, onClose, status, errorMessage }) {
+  const isOk = status === 'ok';
 
   function handleEsc(e) {
     if (e.key === 'Escape') {
@@ -23,9 +24,10 @@ function InfoToolTip({ isOpen, onClose, status, errorMessage }) {
     <div className={`info-tooltip ${isOpen && 'info-tooltip_opened'}`} >
       <div className="info-tooltip__container">
         <button type="button" className="button info-tooltip__button-close" aria-label="Close" onClick={onClose}></button>
-        <img className="info-tooltip__union-img" src={status === 'ok' ? success : fail} alt="" />
+        <img className={`info-tooltip__union-img ${isOk && 'info-tooltip__union-img_success'}`}
+          src={isOk ? success : fail} alt="" />
         <p className="info-tooltip__text">
-          {status === 'ok'
+          {isOk
             ? `${successMessages.register}`
             : `${errorMessage}`
           }

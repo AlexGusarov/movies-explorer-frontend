@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 
-function useForm(formObj) {
+function useFormWithValidationAndRender(formObj) {
   const [form, setForm] = useState(formObj);
   const [values, setValues] = useState({});
 
@@ -35,24 +35,18 @@ function useForm(formObj) {
   const onInputChange = useCallback(
     (event) => {
       const { name, value } = event.target;
-      // copy input object whose value was changed
       const inputObj = { ...form[name] };
-      // update value
+
       inputObj.value = value;
 
-      // update input field's validity
       const isValidInput = isInputFieldValid(inputObj);
-      // if input is valid and it was previously set to invalid
-      // set its valid status to true
+
       if (isValidInput && !inputObj.valid) {
         inputObj.valid = true;
       } else if (!isValidInput && inputObj.valid) {
-        // if input is not valid and it was previously valid
-        // set its valid status to false
         inputObj.valid = false;
       }
 
-      // mark input field as touched
       inputObj.touched = true;
       setForm({ ...form, [name]: inputObj });
     },
@@ -77,4 +71,4 @@ function useForm(formObj) {
   return { renderFormInputs, isFormValid, form };
 }
 
-export default useForm;
+export default useFormWithValidationAndRender;

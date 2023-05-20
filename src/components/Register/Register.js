@@ -1,13 +1,15 @@
 import { Link } from 'react-router-dom';
 import Logo from '../Logo/Logo';
-import useForm from "../../utils/useForm";
+import useFormWithValidationAndRender from "../../hooks/useFormWithValidationAndRender";
 import { signupForm } from "../../utils/formConfig";
+import ErrorTooltip from '../ErrorTooltip/ErrorTooltip';
+import Preloader from '../Preloader/Preloader';
 
 import './Register.css';
 
-function Register({ onRegister }) {
+function Register({ onRegister, isError, message, isLoading }) {
 
-  const { renderFormInputs, isFormValid, form } = useForm(signupForm);
+  const { renderFormInputs, isFormValid, form } = useFormWithValidationAndRender(signupForm);
   // изменить количество инпутов и параметры валидации можно в /utils/formConfig
 
   const handleSubmit = (evt) => {
@@ -20,7 +22,7 @@ function Register({ onRegister }) {
     if (!name || !email || !password) {
       return;
     }
-    console.log('registration data: ', name, email, password);
+
     onRegister(name, email, password);
 
     // makeFormClear();
@@ -35,6 +37,8 @@ function Register({ onRegister }) {
           <p className="register__title">Добро пожаловать!</p>
           <form className="register__form" onSubmit={handleSubmit}>
             {renderFormInputs()}
+            {isError && (<ErrorTooltip message={message} />)}
+            {isLoading && <Preloader />}
             <button type="submit" className="register__submit" disabled={!isFormValid()}>Зарегистрироваться</button>
           </form>
           <div className="register__footer">

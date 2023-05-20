@@ -1,80 +1,126 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useCallback, useMemo } from "react";
 import { useMediaQuery } from "react-responsive";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import SearchForm from "../SearchForm/SearchForm";
 import Switch from "../Switch/Switch";
+import moviesApi from "../../utils/MoviesApi";
 import './MoviesCardList.css';
 
-function MoviesCardList({ cards, isButtonMoreNeed }) {
-  const isDesktopOrLaptop = useMediaQuery({ minWidth: 1224 })
-  const isTabletOrMobile = useMediaQuery({ maxWidth: 1224 })
-  const isMobile = useMediaQuery({ maxWidth: 649 })
+function MoviesCardList({ isButtonMoreNeed }) {
 
-  const [value, setValue] = useState(false);
-  const [cardQuantity, setCardQuantity] = useState(12);
-  const [shownCards, setShownCards] = useState(cards);
+  const [movies, setMovies] = useState([]);
+  const [search, setSearch] = useState("");
+  const [filterString, setFilterString] = useState(null);
+  const [isShort, setIsShort] = useState(false);
+  const [page, setPage] = useState(1);
+  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
 
+  const handleResize = useCallback(() => {
+    setScreenWidth(window.innerWidth);
+  }, []);
 
-  function handleClickMore() {
-    //количество карточек в ряду, которые добавляются кнопкой Ешё//
-    let addition;
-
-    if (isDesktopOrLaptop) {
-      addition = 3;
-    }
-
-    if (isTabletOrMobile) {
-      addition = 2;
-    }
-
-    if (isMobile) {
-      addition = 1;
-    }
-
-    setCardQuantity(cardQuantity + addition);
-    setTimeout(() => {
-      window.scrollBy({
-        top: 320,
-        behavior: 'smooth',
-      });
-    }, 100)
-  }
-
-  //отрисовка карточек в количестве, которое зависит от размера экрана
   useEffect(() => {
-    if (isDesktopOrLaptop) {
-      setCardQuantity(12)
+    window.addEventListener("resize", handleResize);
+
+    return () => {
+      window.removeEventListener("resize", handleResize);
+    };
+  }, []);
+
+  const fetchMovies = useCallback(async () => {
+    try {
+      const response = await moviesApi.getAllMovies();
+
+
+      setMovies(response);
+      console.log(response)
+    } catch (err) {
+      console.log(err);
+    }
+  }, []);
+
+  useEffect(() => {
+    fetchMovies();
+
+    // const savedSearch = localStorage.getItem("search");
+    // const savedIsShort = localStorage.getItem("isShort");
+    // const savedFilteredMovies = localStorage.getItem('movies');
+
+    // if (savedSearch) {
+    //   setSearch(savedSearch);
+    //   setFilterString(savedSearch);
+    // }
+
+    // if (savedIsShort) {
+    //   setIsShort(savedIsShort === "true");
+    // }
+
+    // if (savedFilteredMovies) {
+    //   // setFilteredMovies(JSON.parse(savedFilteredMovies))
+    // }
+  }, []);
+
+
+  const handleSubmit = useCallback(async (search) => {
+    if (!search) {
+      console.log('Введите название фильма')
+      return
+    }
+    setFilterString(search)
+  }, []);
+
+
+  const filteredMovies = useMemo(() => {
+    if (!filterString) {
+      return [];
     }
 
-    if (isTabletOrMobile) {
-      setCardQuantity(8)
-    }
+    return movies.filter((movie) => {
+      const nameRu = movie.nameRU.toLowerCase();
+      const nameEn = movie.nameEN.toLowerCase();
+      const str = filterString.toLowerCase();
 
-    if (isMobile) {
-      setCardQuantity(5)
-    }
+      if (isShort && movie.duration > 40) {
+        return false;
+      }
 
-    setShownCards(cards.slice(0, cardQuantity))
-  }, [cards, cardQuantity, isDesktopOrLaptop, isTabletOrMobile, isMobile]);
+      return nameRu.includes(str) || nameEn.includes(str)
+    })
+
+  }, [filterString, movies, isShort]);
+
+
+  const moviesToRender = useMemo(() => {
+    const countToRender = screenWidth < 768 ? 5 : screenWidth < 1280 ? 8 : 12;
+
+    return filteredMovies.slice(0, countToRender * page);
+  }, [filteredMovies, page, screenWidth]);
+
+  const handleMoreClick = useCallback(() => {
+    setPage((prev) => prev + 1);
+  }, []);
+
 
 
   return (
     <>
-      <SearchForm />
+      <SearchForm onSearch={handleSubmit} />
       <div className="switch-box">
-        <Switch isOn={value} handleToggle={() => setValue(!value)} />
+        <Switch isOn={isShort} handleToggle={() => setIsShort(!isShort)} />
         <span className="switch-box__label">Короткометражки</span>
       </div>
       <section className="movies-card-list">
         <ul className="movies-card-list__list">
-          {shownCards.map((item, index) => (
-            //для этапа вёрстки, потом для key будет movieId
+          {moviesToRender.map((item, index) => (
             <MoviesCard props={item} {...item} key={`${index}`} />
           ))}
         </ul>
-        {isButtonMoreNeed &&
+        {filteredMovies > moviesToRender && (
           <button className="movies-card-list__button-more"
-            onClick={handleClickMore}>Ещё</button>}
+            onClick={handleMoreClick}
+          >Ещё
+          </button>
+        )}
       </section>
     </>
   )

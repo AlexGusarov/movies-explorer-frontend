@@ -9,6 +9,7 @@ const Switch = ({ isOn, handleToggle }) => {
         className="react-switch-checkbox"
         id={`react-switch-new`}
         type="checkbox"
+
       />
       <label
         className="react-switch-label"
