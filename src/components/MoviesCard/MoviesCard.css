@@ -17,6 +17,7 @@
 .movies-card__wrapper {
   display: flex;
   flex-direction: column;
+  width: 80%;
 }
 
 .movies-card__name {
@@ -27,6 +28,7 @@
   line-height: 1.2;
   text-overflow: ellipsis;
   overflow: hidden;
+  white-space: nowrap;
   color: #000000;
   margin: 0 0 9px;
 }

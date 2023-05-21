@@ -22,7 +22,6 @@ function App() {
   const navigate = useNavigate();
 
   const [loggedIn, setLoggedIn] = useState(false);
-  const [movies, setMovies] = useState([]);
   const [loading, setLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [errorTooltipMessage, setErrorTooltipMessage] = useState("");
@@ -92,15 +91,6 @@ function App() {
 
   //переключатель хэдера. Только для верстки, затем loggedIn будет из авторизации
   const isLoggedIn = (location === '') ? false : true;
-
-  // //монтируем фильмы
-  // useEffect(() => {
-  //   moviesApi.getAllMovies()
-  //     .then((res) => setMovies(res))
-  //     .catch((err) => {
-  //       console.log(`Произошла ошибка с получением данных карточек - ${err}`)
-  //     })
-  // }, []);
 
   // if (loading) {
   //   return (

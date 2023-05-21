@@ -1,7 +1,7 @@
 import './SearchForm.css';
 import { useForm } from '../../hooks/useForm';
 
-function SearchForm({ onSearch }) {
+function SearchForm({ onSearch, searchErrorMessage, isError }) {
   const { values, handleChange, setValues } = useForm();
 
   const makeFormClear = () => {
@@ -14,7 +14,6 @@ function SearchForm({ onSearch }) {
     const searchRequest = values.search;
 
     onSearch(searchRequest);
-    console.log('searchRequest: ', searchRequest);
 
     makeFormClear();
     evt.target.reset();
@@ -37,6 +36,7 @@ function SearchForm({ onSearch }) {
           className="search__button"
           type="submit"
           aria-label="Поиск" />
+        {isError && (<span className="search__error">{searchErrorMessage}</span>)}
       </form>
     </section>
   )
