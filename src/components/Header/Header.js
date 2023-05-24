@@ -3,12 +3,13 @@ import Logo from "../Logo/Logo";
 import Navigation from "../Navigation/Navigation";
 import './Header.css';
 
-function Header({ loggedIn }) {
+function Header({ loggedIn, location }) {
+  const isMainPage = (location === '');
 
   return (
-    <header className={!loggedIn ? 'header header_place_main' : 'header'}>
+    <header className={isMainPage ? 'header header_place_main' : 'header'}>
       <Logo />
-      <Navigation loggedIn={loggedIn} />
+      <Navigation loggedIn={loggedIn} isMainPage={isMainPage} />
     </header>
   )
 }

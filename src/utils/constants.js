@@ -2,6 +2,8 @@ export const githubAddress = 'https://github.com/AlexGusarov';
 
 export const BASE_URL = 'https://api.kapibar.nomoredomainsclub.ru';
 
+export const MOVIE__IMAGES_URL = 'https://api.nomoreparties.co';
+
 export const errorMessages = {
   codeConflict: 409,
   conflict: "Пользователь с таким email уже существует",

@@ -5,7 +5,7 @@ import ProfileIcon from '../ProfileIcon/ProfileIcon';
 import Burger from '../Burger/Burger';
 import './Navigation.css';
 
-function Navigation({ loggedIn }) {
+function Navigation({ loggedIn, isMainPage }) {
 
   const isDesktopOrLaptop = useMediaQuery({ minWidth: 1224 })
   const isTabletOrMobile = useMediaQuery({ maxWidth: 1224 })
@@ -40,7 +40,7 @@ function Navigation({ loggedIn }) {
                 </Link>
               </>
             )}
-            {isTabletOrMobile && <Burger />}
+            {isTabletOrMobile && <Burger isMainPage={isMainPage} />}
           </div>
         </>
       }

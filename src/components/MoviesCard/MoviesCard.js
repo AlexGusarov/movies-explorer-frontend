@@ -1,14 +1,29 @@
 import { useState } from 'react';
 import './MoviesCard.css';
 import '../Tooltip/Tooltip.css';
+import { MOVIE__IMAGES_URL } from '../../utils/constants';
 import minToHours from '../../utils/minToHours';
 
-function MoviesCard(props) {
-  const [saved, setSaved] = useState(false);
+function MoviesCard({ props, onSave, onDelete, savedMovies, isSavedMovies }) {
+  const [savedCard, setSavedCard] = useState(false);
+
+  function getIdSavedMovie(movieId, savedMovies) {
+    const currentMovie = savedMovies.filter((movie) => movie.movieId === movieId);
+
+    return currentMovie[0]._id;
+  }
+
+  const deleteMovie = () => {
+    const id = getIdSavedMovie(props.id, savedMovies)
+    onDelete(id, props.id)
+  }
 
   function handleClick() {
-    setSaved(!saved);
-    // + здесь будет вызвана функция сохранения фильмов//
+    setSavedCard(!savedCard);
+
+    if (!savedCard) {
+      onSave(props)
+    } else deleteMovie()
   }
 
   return (
@@ -19,7 +34,7 @@ function MoviesCard(props) {
           <span className="movies-card__duration">{minToHours(props.duration)}</span>
         </div>
         <button
-          className={`movies-card__button ${saved ? 'movies-card__button_saved' : ''}`}
+          className={`movies-card__button ${savedCard ? 'movies-card__button_saved' : ''}`}
           aria-label="Сохранить"
           onClick={handleClick}
         />
@@ -30,7 +45,10 @@ function MoviesCard(props) {
         className="movies-card__link"
         data-tooltip="Смотреть трейлер"
       >
-        <img className="movies-card__image" src={`https://api.nomoreparties.co/${props.image.url}`} alt="Cмотреть трейлер фильма" />
+        <img
+          className="movies-card__image"
+          src={!isSavedMovies ? `${MOVIE__IMAGES_URL}/${props.image.url}` : props.image}
+          alt="Cмотреть трейлер фильма" />
       </a>
     </li>
   )

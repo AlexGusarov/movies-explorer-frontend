@@ -3,7 +3,7 @@ import { NavLink } from 'react-router-dom';
 import { useState } from 'react';
 import ProfileIcon from '../ProfileIcon/ProfileIcon';
 
-function Burger() {
+function Burger({ isMainPage }) {
   const [isActive, setIsActive] = useState(false);
 
   //открыть-закрыть боковое меню
@@ -24,40 +24,24 @@ function Burger() {
     // }
   }
 
+  const buttonLineClass = `burger-button__line 
+  ${isMainPage && !isActive && 'burger-button__line_place_main'}
+  ${isActive && 'burger-button__line_active'}`
+
   return (
     <>
-      <div className={
-        isActive
-          ? 'burger-button burger-button_active'
-          : 'burger-button'
-      }
+      <div className={`burger-button ${isActive && 'burger-button_active'}`}
         onClick={toggleBurger}>
-        <span className={
-          isActive
-            ? 'burger-button__line burger-button__line_active'
-            : 'burger-button__line'
-        }></span>
-        <span className={
-          isActive
-            ? 'burger-button__line burger-button__line_active'
-            : 'burger-button__line'
-        }></span>
-        <span className={
-          isActive
-            ? 'burger-button__line burger-button__line_active'
-            : 'burger-button__line'
-        }></span>
+        <span className={buttonLineClass}></span>
+        <span className={buttonLineClass}></span>
+        <span className={buttonLineClass}></span>
       </div>
-      <div className={
-        isActive
-          ? 'burger__menu-container burger__menu-container_active'
-          : 'burger__menu-container'
-      }>
-        <ul className={
-          isActive
-            ? 'burger__menu burger__menu_active'
-            : 'burger__menu'
-        }
+      <div
+        className={
+          `burger__menu-container 
+        ${isActive && 'burger__menu-container_active'
+          }`}>
+        <ul className={`burger__menu ${isActive && 'burger__menu_active'}`}
           onClick={handleCloseMenu}
         >
           <li className="burger__item">

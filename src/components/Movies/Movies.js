@@ -4,10 +4,11 @@ import moviesApi from "../../utils/MoviesApi";
 import { errorMessages } from "../../utils/constants";
 import Switch from "../Switch/Switch";
 import SearchForm from "../SearchForm/SearchForm";
-import MainApi from "../../utils/MainApi";
 
-function SavedMovies({ onSave, onDelete, savedMovies, isSavedMovies }) {
-  const [userMovies, setUserMovies] = useState([]);
+
+function Movies({ onSave, onDelete, savedMovies, isSavedMovies }) {
+
+  const [movies, setMovies] = useState([]);
   const [search, setSearch] = useState("");
   const [filterString, setFilterString] = useState(null);
   const [isShort, setIsShort] = useState(false);
@@ -15,6 +16,7 @@ function SavedMovies({ onSave, onDelete, savedMovies, isSavedMovies }) {
   const [searchErrorMessage, setSearchErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isData, setIsData] = useState(true);
+  const [page, setPage] = useState(1);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const { searchEmpty } = errorMessages;
 
@@ -30,13 +32,15 @@ function SavedMovies({ onSave, onDelete, savedMovies, isSavedMovies }) {
     };
   }, []);
 
-
+  const handleMoreClick = useCallback(() => {
+    setPage((prev) => prev + 1);
+  }, []);
 
   const fetchMovies = useCallback(async () => {
     try {
       setIsLoading(true);
-      const response = await MainApi.getSavedMovies();
-      setUserMovies(response);
+      const response = await moviesApi.getAllMovies();
+      setMovies(response);
     } catch (err) {
       setIsData(false);
     }
@@ -48,16 +52,16 @@ function SavedMovies({ onSave, onDelete, savedMovies, isSavedMovies }) {
   useEffect(() => {
     fetchMovies();
 
-    const savedSearchUserMovies = localStorage.getItem("search-user");
-    const savedIsShortUserMovies = localStorage.getItem("isShort-user");
+    const savedSearch = localStorage.getItem("search");
+    const savedIsShort = localStorage.getItem("isShort");
 
-    if (savedSearchUserMovies) {
-      setSearch(savedSearchUserMovies);
-      setFilterString(savedSearchUserMovies);
+    if (savedSearch) {
+      setSearch(savedSearch);
+      setFilterString(savedSearch);
     }
 
-    if (savedIsShortUserMovies) {
-      setIsShort(savedIsShortUserMovies === "true");
+    if (savedIsShort) {
+      setIsShort(savedIsShort === "true");
     }
   }, []);
 
@@ -76,8 +80,7 @@ function SavedMovies({ onSave, onDelete, savedMovies, isSavedMovies }) {
     if (!filterString) {
       return [];
     }
-    console.log('userMovies: ', userMovies)
-    const filtered = userMovies.filter((movie) => {
+    const filtered = movies.filter((movie) => {
       const nameRu = movie.nameRU.toLowerCase();
       const nameEn = movie.nameEN.toLowerCase();
       const str = filterString.toLowerCase();
@@ -87,22 +90,18 @@ function SavedMovies({ onSave, onDelete, savedMovies, isSavedMovies }) {
       }
       return nameRu.includes(str) || nameEn.includes(str)
     })
-    localStorage.setItem("search-user", filterString);
-    localStorage.setItem("isShort-user", String(isShort));
+    localStorage.setItem("search", filterString);
+    localStorage.setItem("isShort", String(isShort));
 
     return filtered;
-  }, [filterString, userMovies, isShort]);
+  }, [filterString, movies, isShort]);
 
   const moviesToRender = useMemo(() => {
     const countToRender = screenWidth < 768 ? 5 : screenWidth < 1280 ? 8 : 12;
 
-    if (!filterString) {
-      return userMovies.slice(0, countToRender)
-    } else {
-      return filteredMovies.slice(0, countToRender);
-    }
+    return filteredMovies.slice(0, countToRender * page);
+  }, [filteredMovies, page, screenWidth]);
 
-  }, [filteredMovies, screenWidth]);
 
   return (
     <>
@@ -121,18 +120,19 @@ function SavedMovies({ onSave, onDelete, savedMovies, isSavedMovies }) {
         isShort={isShort}
         setIsShot={setIsShort}
         isErrorSearch={isErrorSearch}
-        isButtonMoreNeed={false}
+        isButtonMoreNeed={true}
         searchErrorMessage={searchErrorMessage}
         filteredMovies={filteredMovies}
         handleSubmitSearch={handleSubmitSearch}
         moviesToRender={moviesToRender}
+        handleMoreClick={handleMoreClick}
         onSave={onSave}
         onDelete={onDelete}
-        savedMovies={userMovies}
+        savedMovies={savedMovies}
         isSavedMovies={isSavedMovies}
       />
     </>
   )
 };
 
-export default SavedMovies;
+export default Movies;
