@@ -6,7 +6,7 @@ import Switch from "../Switch/Switch";
 import SearchForm from "../SearchForm/SearchForm";
 import MainApi from "../../utils/MainApi";
 
-function SavedMovies({ onSave, onDelete, savedMovies, isSavedMovies }) {
+function SavedMovies({ isSavedMovies }) {
   const [userMovies, setUserMovies] = useState([]);
   const [search, setSearch] = useState("");
   const [filterString, setFilterString] = useState(null);
@@ -18,25 +18,23 @@ function SavedMovies({ onSave, onDelete, savedMovies, isSavedMovies }) {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const { searchEmpty } = errorMessages;
 
-  const handleResize = useCallback(() => {
-    setScreenWidth(window.innerWidth);
-  }, []);
+  // const handleResize = useCallback(() => {
+  //   setScreenWidth(window.innerWidth);
+  // }, []);
 
-  useEffect(() => {
-    window.addEventListener("resize", handleResize);
+  // useEffect(() => {
+  //   window.addEventListener("resize", handleResize);
 
-    return () => {
-      window.removeEventListener("resize", handleResize);
-    };
-  }, []);
+  //   return () => {
+  //     window.removeEventListener("resize", handleResize);
+  //   };
+  // }, []);
 
-
-
-  const fetchMovies = useCallback(async () => {
+  const getSavedMovies = useCallback(async () => {
     try {
       setIsLoading(true);
-      const response = await MainApi.getSavedMovies();
-      setUserMovies(response);
+      const apiSavedMovies = await MainApi.getSavedMovies();
+      setUserMovies(apiSavedMovies);
     } catch (err) {
       setIsData(false);
     }
@@ -46,7 +44,7 @@ function SavedMovies({ onSave, onDelete, savedMovies, isSavedMovies }) {
   }, []);
 
   useEffect(() => {
-    fetchMovies();
+    getSavedMovies();
 
     const savedSearchUserMovies = localStorage.getItem("search-user");
     const savedIsShortUserMovies = localStorage.getItem("isShort-user");
@@ -72,11 +70,11 @@ function SavedMovies({ onSave, onDelete, savedMovies, isSavedMovies }) {
     setFilterString(search);
   }, []);
 
+
   const filteredMovies = useMemo(() => {
     if (!filterString) {
       return [];
     }
-    console.log('userMovies: ', userMovies)
     const filtered = userMovies.filter((movie) => {
       const nameRu = movie.nameRU.toLowerCase();
       const nameEn = movie.nameEN.toLowerCase();
@@ -89,20 +87,27 @@ function SavedMovies({ onSave, onDelete, savedMovies, isSavedMovies }) {
     })
     localStorage.setItem("search-user", filterString);
     localStorage.setItem("isShort-user", String(isShort));
-
+    console.log('filtered: ', filtered)
     return filtered;
   }, [filterString, userMovies, isShort]);
 
-  const moviesToRender = useMemo(() => {
-    const countToRender = screenWidth < 768 ? 5 : screenWidth < 1280 ? 8 : 12;
 
-    if (!filterString) {
-      return userMovies.slice(0, countToRender)
-    } else {
-      return filteredMovies.slice(0, countToRender);
-    }
+  function handleDeleteMovie(id, movieId) {
+    console.log('id: ', id, 'movieId: ', movieId)
+    console.log('prev UserMovies', userMovies)
+    MainApi.deleteMovie(id)
+      .then(() => {
+        setUserMovies(prev => {
+          return prev.filter(movie => movie.movieId !== movieId);
+        })
+        console.log('post userMovies', userMovies)
+      })
+      .catch(err => {
+        console.log(err);
+        console.log(movieId)
+      });
+  }
 
-  }, [filteredMovies, screenWidth]);
 
   return (
     <>
@@ -125,9 +130,8 @@ function SavedMovies({ onSave, onDelete, savedMovies, isSavedMovies }) {
         searchErrorMessage={searchErrorMessage}
         filteredMovies={filteredMovies}
         handleSubmitSearch={handleSubmitSearch}
-        moviesToRender={moviesToRender}
-        onSave={onSave}
-        onDelete={onDelete}
+        moviesToRender={userMovies}
+        onDelete={handleDeleteMovie}
         savedMovies={userMovies}
         isSavedMovies={isSavedMovies}
       />

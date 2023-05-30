@@ -4,11 +4,14 @@ import moviesApi from "../../utils/MoviesApi";
 import { errorMessages } from "../../utils/constants";
 import Switch from "../Switch/Switch";
 import SearchForm from "../SearchForm/SearchForm";
+import MainApi from "../../utils/MainApi";
+import { MOVIE__IMAGES_URL } from '../../utils/constants';
 
 
-function Movies({ onSave, onDelete, savedMovies, isSavedMovies }) {
+function Movies({ isSavedMovies }) {
 
   const [movies, setMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = useState([]);
   const [search, setSearch] = useState("");
   const [filterString, setFilterString] = useState(null);
   const [isShort, setIsShort] = useState(false);
@@ -20,9 +23,11 @@ function Movies({ onSave, onDelete, savedMovies, isSavedMovies }) {
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const { searchEmpty } = errorMessages;
 
+
   const handleResize = useCallback(() => {
     setScreenWidth(window.innerWidth);
   }, []);
+
 
   useEffect(() => {
     window.addEventListener("resize", handleResize);
@@ -32,9 +37,11 @@ function Movies({ onSave, onDelete, savedMovies, isSavedMovies }) {
     };
   }, []);
 
+
   const handleMoreClick = useCallback(() => {
     setPage((prev) => prev + 1);
   }, []);
+
 
   const fetchMovies = useCallback(async () => {
     try {
@@ -49,8 +56,23 @@ function Movies({ onSave, onDelete, savedMovies, isSavedMovies }) {
     }
   }, []);
 
+
+  const getSavedMovies = useCallback(async () => {
+    try {
+      setIsLoading(true);
+      const apiSavedMovies = await MainApi.getSavedMovies();
+      setSavedMovies(apiSavedMovies);
+    } catch (err) {
+      setIsData(false);
+    }
+    finally {
+      setIsLoading(false);
+    }
+  }, []);
+
   useEffect(() => {
     fetchMovies();
+    getSavedMovies()
 
     const savedSearch = localStorage.getItem("search");
     const savedIsShort = localStorage.getItem("isShort");
@@ -76,6 +98,7 @@ function Movies({ onSave, onDelete, savedMovies, isSavedMovies }) {
     setFilterString(search);
   }, []);
 
+
   const filteredMovies = useMemo(() => {
     if (!filterString) {
       return [];
@@ -96,11 +119,54 @@ function Movies({ onSave, onDelete, savedMovies, isSavedMovies }) {
     return filtered;
   }, [filterString, movies, isShort]);
 
+
   const moviesToRender = useMemo(() => {
     const countToRender = screenWidth < 768 ? 5 : screenWidth < 1280 ? 8 : 12;
 
     return filteredMovies.slice(0, countToRender * page);
   }, [filteredMovies, page, screenWidth]);
+
+
+  function handleSaveMovie(data) {
+    MainApi.saveMovie({
+      country: data.country ? data.country : 'No country',
+      director: data.director ? data.director : 'No director',
+      duration: data.duration ? data.duration : 0,
+      year: data.year ? data.year : '0000',
+      description: data.description ? data.description.slice(0, 1000) : 'No description',
+      image: data.image.url ? MOVIE__IMAGES_URL + data.image.url : 'No image link',
+      trailerLink: data.trailerLink ? data.trailerLink : 'No trailer link',
+      thumbnail: data.image.formats.thumbnail.url ? MOVIE__IMAGES_URL + data.image.formats.thumbnail.url : 'No info image',
+      movieId: data.id,
+      nameRU: data.nameRU ? data.nameRU : 'No nameRU',
+      nameEN: data.nameEN ? data.nameEN : 'No nameEN',
+    })
+      .then((savedMovie) => {
+        setSavedMovies(prev => {
+          return [...prev, savedMovie];
+        });
+      })
+      .catch(err => {
+        console.log(err.message)
+      });
+  }
+
+
+  function handleDeleteMovie(id, movieId) {
+    console.log('id: ', id, 'movieId: ', movieId)
+    console.log('prev savedMovies', savedMovies)
+    MainApi.deleteMovie(id)
+      .then(() => {
+        setSavedMovies(prev => {
+          return prev.filter(movie => movie.movieId !== movieId);
+        })
+        console.log('post savedMovies', savedMovies)
+      })
+      .catch(err => {
+        console.log(err);
+        console.log(movieId)
+      });
+  }
 
 
   return (
@@ -126,8 +192,8 @@ function Movies({ onSave, onDelete, savedMovies, isSavedMovies }) {
         handleSubmitSearch={handleSubmitSearch}
         moviesToRender={moviesToRender}
         handleMoreClick={handleMoreClick}
-        onSave={onSave}
-        onDelete={onDelete}
+        onSave={handleSaveMovie}
+        onDelete={handleDeleteMovie}
         savedMovies={savedMovies}
         isSavedMovies={isSavedMovies}
       />

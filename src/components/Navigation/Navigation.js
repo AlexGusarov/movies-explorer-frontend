@@ -25,15 +25,15 @@ function Navigation({ loggedIn, isMainPage }) {
               <>
                 <div className='navigation__link-wrapper'>
                   <NavLink to="/movies" className={({ isActive }) =>
-                    isActive
-                      ? "navigation__link navigation__link_state_logged-out navigation__link_active"
-                      : "navigation__link navigation__link_state_logged-out"
-                  }>Фильмы</NavLink>
+                    `navigation__link 
+                    ${isActive && 'navigation__link_active'}
+                    ${isMainPage && 'navigation__link_place_main'}`}
+                  >Фильмы</NavLink>
                   <NavLink to="/saved-movies" className={({ isActive }) =>
-                    isActive
-                      ? "navigation__link navigation__link_state_logged-out navigation__link_active"
-                      : "navigation__link navigation__link_state_logged-out"
-                  }>Сохраненные фильмы</NavLink>
+                    `navigation__link
+                     ${isActive && 'navigation__link_active'}
+                     ${isMainPage && 'navigation__link_place_main'}`}
+                  >Сохраненные фильмы</NavLink>
                 </div>
                 <Link to="/profile" className="navigation__link navigation__link-profile">
                   {<ProfileIcon />}

@@ -17,11 +17,13 @@ function MoviesCardList({
 
   const { notFound, noData } = errorMessages;
 
+
+
   return (
     <section className="movies-card-list">
       {isLoading && <Preloader />}
       <ul className="movies-card-list__list">
-        {(!isLoading && filteredMovies.length === 0) &&
+        {(!isLoading && filteredMovies.length === 0 && !isSavedMovies) &&
           (<span className="movies-card-list__error">{isData ? notFound : noData}</span>)
         }
         {moviesToRender.map((item) => (
@@ -31,8 +33,10 @@ function MoviesCardList({
             onSave={onSave}
             onDelete={onDelete}
             savedMovies={savedMovies}
-            isSavedMovies={isSavedMovies} />
-        ))}
+            isSavedMovies={isSavedMovies}
+          />
+        )
+        )}
       </ul>
       {(isButtonMoreNeed && filteredMovies > moviesToRender) && (
         <button className="movies-card-list__button-more"

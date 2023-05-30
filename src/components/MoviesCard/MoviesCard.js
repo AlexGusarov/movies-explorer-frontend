@@ -1,30 +1,40 @@
-import { useState } from 'react';
+import { useCallback, useState } from 'react';
+import { useLocation } from 'react-router-dom';
 import './MoviesCard.css';
 import '../Tooltip/Tooltip.css';
 import { MOVIE__IMAGES_URL } from '../../utils/constants';
 import minToHours from '../../utils/minToHours';
 
 function MoviesCard({ props, onSave, onDelete, savedMovies, isSavedMovies }) {
-  const [savedCard, setSavedCard] = useState(false);
+  const [isSaved, setIsSaved] = useState(false)
 
-  function getIdSavedMovie(movieId, savedMovies) {
-    const currentMovie = savedMovies.filter((movie) => movie.movieId === movieId);
+  const location = useLocation().pathname.slice(1);
 
-    return currentMovie[0]._id;
+
+  function get_idByMovieId(movieId, savedMovies) {
+    const id = savedMovies.filter((card) => card.movieId === movieId)[0]._id
+    return id;
   }
 
-  const deleteMovie = () => {
-    const id = getIdSavedMovie(props.id, savedMovies)
-    onDelete(id, props.id)
+  const handleClick = () => {
+    if (location === 'movies') {
+      if (!isSaved) {
+        onSave(props);
+        setIsSaved(true);
+      } else {
+        const _id = get_idByMovieId(props.id, savedMovies);
+        const movieId = props.id;
+        onDelete(_id, movieId);
+        setIsSaved(false);
+      }
+    }
+
+    if (location === 'saved-movies') {
+      onDelete(props._id, props.movieId)
+      //на разных страницах данные в props приходят в разном формате 
+    }
   }
 
-  function handleClick() {
-    setSavedCard(!savedCard);
-
-    if (!savedCard) {
-      onSave(props)
-    } else deleteMovie()
-  }
 
   return (
     <li className="movies-card">
@@ -34,8 +44,10 @@ function MoviesCard({ props, onSave, onDelete, savedMovies, isSavedMovies }) {
           <span className="movies-card__duration">{minToHours(props.duration)}</span>
         </div>
         <button
-          className={`movies-card__button ${savedCard ? 'movies-card__button_saved' : ''}`}
-          aria-label="Сохранить"
+          className={`movies-card__button 
+            ${isSavedMovies && 'movies-card__button-close'}       
+            ${isSaved && 'movies-card__button_saved'}`}
+          aria-label={!isSavedMovies ? 'Сохранить' : 'Удалить'}
           onClick={handleClick}
         />
       </div>
