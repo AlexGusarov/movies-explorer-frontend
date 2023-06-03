@@ -1,3 +1,15 @@
+@keyframes appr {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+
+
 .error-tooltip {
   width: 100%;
   margin-top: 20px;
@@ -12,6 +24,7 @@
   line-height: 1.2;
   margin: 0;
   text-align: center;
+  animation: appr 0.3s ease;
 }
 
 .error-tooltip__message_success {

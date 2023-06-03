@@ -81,7 +81,6 @@ function App() {
 
 
   const handleProfileSubmit = useCallback(({ name, email }) => {
-    console.log('name: ', name, 'email: ', email)
     MainApi.updateUser({ name, email });
 
     setCurrentUser({ name, email });
