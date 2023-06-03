@@ -28,4 +28,4 @@ https://github.com/AlexGusarov/movie-explorer-api
 https://disk.yandex.ru/d/5AOka-DyPfPY0Q 
 
 Ссылка на пул-реквест: <br>
-
+https://github.com/AlexGusarov/movies-explorer-frontend/pull/2
