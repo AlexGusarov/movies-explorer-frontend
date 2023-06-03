@@ -18,7 +18,6 @@ function MoviesCardList({
   const { notFound, noData } = errorMessages;
 
 
-
   return (
     <section className="movies-card-list">
       {isLoading && <Preloader />}

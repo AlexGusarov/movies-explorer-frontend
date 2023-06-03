@@ -15,13 +15,8 @@ function Burger({ isMainPage }) {
     }
   }
 
-  function handleCloseMenu(evt) {
-    // evt.preventDefault();
+  function handleCloseMenu() {
     setIsActive(false);
-
-    // if (evt.target.classList.contains('burger__link')) {
-    //   setIsActive(false);
-    // }
   }
 
   const buttonLineClass = `burger-button__line 
@@ -68,7 +63,6 @@ function Burger({ isMainPage }) {
           <li className="burger__item">
             <NavLink
               to="/profile"
-              // onClick={handleCloseMenu}
               className="burger__link">
               {<ProfileIcon />}
             </NavLink>

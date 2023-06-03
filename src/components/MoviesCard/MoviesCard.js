@@ -1,17 +1,15 @@
-import { useCallback, useState } from "react";
 import { useLocation } from "react-router-dom";
-import "./MoviesCard.css";
-import "../Tooltip/Tooltip.css";
 import { MOVIE__IMAGES_URL } from "../../utils/constants";
 import minToHours from "../../utils/minToHours";
+import "./MoviesCard.css";
+import "../Tooltip/Tooltip.css";
 
 function MoviesCard({ props, onSave, onDelete, savedMovies, isSavedMovies, isSaved }) {
 
   const location = useLocation().pathname.slice(1);
 
-  function get_idByMovieId(movieId, savedMovies) {
-    const id = savedMovies.filter((card) => card.movieId === movieId)[0]._id
-    return id;
+  const getId = (movieId, savedMovies) => {
+    return savedMovies.filter((card) => card.movieId === movieId)[0]._id
   }
 
   const handleClick = () => {
@@ -19,7 +17,7 @@ function MoviesCard({ props, onSave, onDelete, savedMovies, isSavedMovies, isSav
       if (!isSaved) {
         onSave(props);
       } else {
-        const _id = get_idByMovieId(props.id, savedMovies);
+        const _id = getId(props.id, savedMovies);
         const movieId = props.id;
         onDelete(_id, movieId);
       }

@@ -1,6 +1,5 @@
 import { useEffect, useState, useCallback, useMemo } from "react";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
-import moviesApi from "../../utils/MoviesApi";
 import { errorMessages } from "../../utils/constants";
 import Switch from "../Switch/Switch";
 import SearchForm from "../SearchForm/SearchForm";
@@ -15,20 +14,8 @@ function SavedMovies({ isSavedMovies }) {
   const [searchErrorMessage, setSearchErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isData, setIsData] = useState(true);
-  const [screenWidth, setScreenWidth] = useState(window.innerWidth);
   const { searchEmpty } = errorMessages;
 
-  // const handleResize = useCallback(() => {
-  //   setScreenWidth(window.innerWidth);
-  // }, []);
-
-  // useEffect(() => {
-  //   window.addEventListener("resize", handleResize);
-
-  //   return () => {
-  //     window.removeEventListener("resize", handleResize);
-  //   };
-  // }, []);
 
   const getSavedMovies = useCallback(async () => {
     try {
@@ -42,6 +29,7 @@ function SavedMovies({ isSavedMovies }) {
       setIsLoading(false);
     }
   }, []);
+
 
   useEffect(() => {
     getSavedMovies();
@@ -87,20 +75,17 @@ function SavedMovies({ isSavedMovies }) {
     })
     localStorage.setItem("search-user", filterString);
     localStorage.setItem("isShort-user", String(isShort));
-    console.log('filtered: ', filtered)
+
     return filtered;
   }, [filterString, userMovies, isShort]);
 
 
   function handleDeleteMovie(id, movieId) {
-    console.log('id: ', id, 'movieId: ', movieId)
-    console.log('prev UserMovies', userMovies)
     MainApi.deleteMovie(id)
       .then(() => {
         setUserMovies(prev => {
           return prev.filter(movie => movie.movieId !== movieId);
         })
-        console.log('post userMovies', userMovies)
       })
       .catch(err => {
         console.log(err);

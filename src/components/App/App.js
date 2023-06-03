@@ -9,14 +9,10 @@ import SavedMovies from '../SavedMovies/SavedMovies';
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
 import Profile from '../Profile/Profile';
-import Preloader from '../Preloader/Preloader';
 import MainApi from '../../utils/MainApi';
 import { errorMessages } from '../../utils/constants';
 import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
-import { MOVIE__IMAGES_URL } from '../../utils/constants';
-
-
 import './App.css';
 
 function App() {
@@ -24,11 +20,9 @@ function App() {
   const [loading, setLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [errorTooltipMessage, setErrorTooltipMessage] = useState("");
-  const [registerStatus, setRegisterStatus] = useState(false);
   const [currentUser, setCurrentUser] = useState({});
   const [savedMovies, setSavedMovies] = useState([]);
   const [isAppStart, setIsAppStart] = useState(false);
-
 
   const location = useLocation().pathname.slice(1);
   const navigate = useNavigate();
@@ -39,23 +33,21 @@ function App() {
     return pathsForHeader.includes(location);
   }
 
+
   function isFooterNeed() {
     const pathsForFooter = ['', 'movies', 'saved-movies'];
     return pathsForFooter.includes(location);
   }
+
 
   const registerUser = useCallback(async (name, email, password) => {
     try {
       setLoading(true);
       const data = await MainApi.register(name, email, password);
       if (data) {
-        setRegisterStatus(true);
-
-        navigate('/signin');
+        enterAccount(email, password);
       }
     } catch (err) {
-      setRegisterStatus(false);
-
       const { codeConflict, conflict, registerMistake } = errorMessages;
       const message = err.includes(codeConflict) ? conflict : registerMistake;
       console.log(message);
@@ -87,12 +79,14 @@ function App() {
     }
   }, [])
 
+
   const handleProfileSubmit = useCallback(({ name, email }) => {
     console.log('name: ', name, 'email: ', email)
     MainApi.updateUser({ name, email });
 
     setCurrentUser({ name, email });
   }, [])
+
 
   const tokenCheck = useCallback(async () => {
     try {
