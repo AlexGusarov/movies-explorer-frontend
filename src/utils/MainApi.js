@@ -48,6 +48,20 @@ class Api {
       .then((res) => this._checkResponse(res))
   }
 
+  updateUser({ name, email }) {
+    const token = localStorage.getItem('token');
+    return fetch(`${this._baseUrl}/users/me`, {
+      method: 'PATCH',
+      headers: {
+        'Accept': 'application/json',
+        'Content-Type': 'application/json',
+        'Authorization': `Bearer ${token}`,
+      },
+      body: JSON.stringify({ name, email })
+    })
+      .then((res) => this._checkResponse(res))
+  }
+
   saveMovie(data) {
     const token = localStorage.getItem('token');
     return fetch(`${this._baseUrl}/movies`, {

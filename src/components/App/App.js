@@ -72,7 +72,6 @@ function App() {
     try {
       setLoading(true);
       const data = await MainApi.authorize(login, password);
-
       if (!data) {
         setIsError(true);
         setErrorTooltipMessage(errorMessages.badRequest);
@@ -85,27 +84,15 @@ function App() {
       }
     } catch (err) {
       console.log(err)
-      setIsError(true);
-      setErrorTooltipMessage(errorMessages.badRequest);
     }
-    finally {
-      setLoading(false)
-    }
-  }, []);
+  }, [])
 
+  const handleProfileSubmit = useCallback(({ name, email }) => {
+    console.log('name: ', name, 'email: ', email)
+    MainApi.updateUser({ name, email });
 
-
-
-
-  // //переключатель хэдера. Только для верстки, затем loggedIn будет из авторизации
-  // const isLoggedIn = (location === '') ? false : true;
-
-  // if (loading) {
-  //   return (
-  //     <Preloader />
-  //   )
-  // }
-
+    setCurrentUser({ name, email });
+  }, [])
 
   const tokenCheck = useCallback(async () => {
     try {
@@ -122,6 +109,7 @@ function App() {
         }
         if (user) {
           setLoggedIn(true);
+          setCurrentUser(user);
           setIsAppStart(true);
         }
       }
@@ -133,6 +121,12 @@ function App() {
       setLoading(false);
     }
   }, [loggedIn]);
+
+
+  const handleLogout = useCallback(() => {
+    setLoggedIn(false);
+    localStorage.removeItem('token');
+  }, [])
 
 
   useEffect(() => {
@@ -178,7 +172,10 @@ function App() {
               } />
               <Route path="/profile" element={
                 <ProtectedRoute loggedIn={loggedIn}>
-                  <Profile />
+                  <Profile
+                    onProfile={handleProfileSubmit}
+                    onLogout={handleLogout}
+                  />
                 </ProtectedRoute>
               } />
               <Route path="*" element={<NoMatch />} />

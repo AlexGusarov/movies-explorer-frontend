@@ -70,10 +70,37 @@
   border: none;
   cursor: pointer;
   transition: all 0.2s;
+  position: relative;
 }
 
 .movies-card__button-close:hover {
   opacity: 0.8;
+}
+
+.movies-card__button-close::after {
+  content: 'Удалить';
+  position: absolute;
+  width: 70px;
+  left: -2.5em;
+  top: -1em;
+  background-color: #fff;
+  color: #000;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-size: 0.8em;
+  text-align: center;
+  padding: 0.5em;
+  box-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+  border: 1px solid #000;
+  border-radius: 10px;
+  pointer-events: none;
+  opacity: 0;
+  transition: .3s ease-out .5s;
+}
+
+.movies-card__button-close:hover::after {
+  opacity: 1;
+  top: -2.5em;
+  left: -3em;
 }
 
 .movies-card__container {

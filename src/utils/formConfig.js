@@ -82,3 +82,25 @@ export const signinForm = {
   }
 };
 
+
+export const profileForm = {
+  name: {
+    ...createFormFieldConfig("Имя", "name", "text", "Имя"),
+    validationRules: [
+      requiredRule("name"),
+      minLengthRule("Имя", 3),
+      maxLengthRule("Имя", 25)
+    ]
+  },
+  email: {
+    ...createFormFieldConfig("E-mail", "email", "email", "E-mail"),
+    validationRules: [
+      requiredRule("email"),
+      minLengthRule("E-mail", 10),
+      maxLengthRule("E-mail", 25),
+      emailValidRule()
+    ]
+  }
+
+};
+

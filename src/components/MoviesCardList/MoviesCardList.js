@@ -26,17 +26,20 @@ function MoviesCardList({
         {(!isLoading && filteredMovies.length === 0 && !isSavedMovies) &&
           (<span className="movies-card-list__error">{isData ? notFound : noData}</span>)
         }
-        {moviesToRender.map((item) => (
-          < MoviesCard
-            props={item} {...item}
-            key={isSavedMovies ? item._id : item.id}
-            onSave={onSave}
-            onDelete={onDelete}
-            savedMovies={savedMovies}
-            isSavedMovies={isSavedMovies}
-          />
-        )
-        )}
+        {moviesToRender.map(item => {
+          const isSaved = savedMovies.some(savedMovie => savedMovie.movieId === item.id);
+
+          return (
+            < MoviesCard
+              props={item} {...item}
+              key={isSavedMovies ? item._id : item.id}
+              onSave={onSave}
+              isSaved={isSaved}
+              onDelete={onDelete}
+              savedMovies={savedMovies}
+              isSavedMovies={isSavedMovies}
+            />)
+        })}
       </ul>
       {(isButtonMoreNeed && filteredMovies > moviesToRender) && (
         <button className="movies-card-list__button-more"
