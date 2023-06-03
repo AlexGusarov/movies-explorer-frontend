@@ -1,12 +1,14 @@
 import "./Profile.css";
-import { useContext, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useFormWithValidation } from "../../hooks/UseFormWithValidation";
 import ErrorTooltip from "../ErrorTooltip/ErrorTooltip";
+import { successMessages } from "../../utils/constants";
 
 
 function Profile({ onProfile, onLogout }) {
   const currentUser = useContext(CurrentUserContext);
+  const [isSuccess, setIsSuccess] = useState(false);
   const { values, handleChange, setValues, errors, isValid } = useFormWithValidation();
 
   useEffect(() => {
@@ -17,6 +19,10 @@ function Profile({ onProfile, onLogout }) {
     evt.preventDefault();
 
     onProfile({ name: values.name, email: values.email });
+
+    setIsSuccess(true);
+
+    setTimeout(() => setIsSuccess(false), 3000);
   }
 
   const handleLogout = () => onLogout();
@@ -72,6 +78,7 @@ function Profile({ onProfile, onLogout }) {
         </div>
         {!isValid && errors.name && <ErrorTooltip message={`Имя: ${errors.name}`} />}
         {!isValid && errors.email && <ErrorTooltip message={`Email: ${errors.email}`} />}
+        {isSuccess && <ErrorTooltip isSuccess={isSuccess} message={successMessages.profile} />}
         <button
           className="profile__button-edit"
           type="submit"

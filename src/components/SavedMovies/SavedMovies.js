@@ -115,7 +115,7 @@ function SavedMovies({ isSavedMovies }) {
         searchErrorMessage={searchErrorMessage}
         filteredMovies={filteredMovies}
         handleSubmitSearch={handleSubmitSearch}
-        moviesToRender={userMovies}
+        moviesToRender={filteredMovies}
         onDelete={handleDeleteMovie}
         savedMovies={userMovies}
         isSavedMovies={isSavedMovies}

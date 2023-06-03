@@ -16,5 +16,6 @@ export const errorMessages = {
 }
 
 export const successMessages = {
-  register: "Вы успешно зарегистрировались"
+  register: "Вы успешно зарегистрировались",
+  profile: "Вы успешно поменяли личные данные"
 }

@@ -153,14 +153,12 @@ function Movies({ isSavedMovies }) {
 
 
   function handleDeleteMovie(id, movieId) {
-    console.log('id: ', id, 'movieId: ', movieId)
-    console.log('prev savedMovies', savedMovies)
+
     MainApi.deleteMovie(id)
       .then(() => {
         setSavedMovies(prev => {
           return prev.filter(movie => movie.movieId !== movieId);
         })
-        console.log('post savedMovies', savedMovies)
       })
       .catch(err => {
         console.log(err);

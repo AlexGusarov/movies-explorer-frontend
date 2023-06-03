@@ -13,3 +13,7 @@
   margin: 0;
   text-align: center;
 }
+
+.error-tooltip__message_success {
+  color: #2BE080
+}
