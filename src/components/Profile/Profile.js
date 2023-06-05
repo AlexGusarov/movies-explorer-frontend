@@ -57,9 +57,10 @@ function Profile({ onProfile, onLogout }) {
               value={values.name || ""}
               minLength={4}
               maxLength={30}
-              pattern="[a-zA-Zа-яА-Я\s-]+"
+              pattern="[a-zA-Zа-яА-Я \-]+"
               autoComplete="off"
               onChange={handleChange}
+              title="Только буквы, дефис и пробел"
             ></input>
           </div>
           <label className="profile__label

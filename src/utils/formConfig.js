@@ -5,7 +5,8 @@ import {
   requiredRule,
   minLengthRule,
   maxLengthRule,
-  emailValidRule
+  emailValidRule,
+  nameValidRule
 } from "./inputValidationRules";
 
 function createFormFieldConfig(label, name, type, placeholder, defaultValue = "") {
@@ -39,7 +40,8 @@ export const signupForm = {
     validationRules: [
       requiredRule("name"),
       minLengthRule("Имя", 3),
-      maxLengthRule("Имя", 25)
+      maxLengthRule("Имя", 25),
+      nameValidRule()
     ]
   },
   email: {

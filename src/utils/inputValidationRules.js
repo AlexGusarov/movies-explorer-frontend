@@ -30,6 +30,15 @@ export function maxLengthRule(inputName, maxCharacters) {
   );
 }
 
+
+export function nameValidRule() {
+  return createValidationRule(
+    "nameValid",
+    "В имени разрешены только буквы и пробел",
+    (inputValue) => /[a-zA-Zа-яА-Я\s-]+/.test(inputValue)
+  );
+}
+
 export function emailValidRule() {
   return createValidationRule(
     "emailValid",
