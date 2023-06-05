@@ -39,16 +39,16 @@ function SavedMovies({ isSavedMovies }) {
   useEffect(() => {
     getSavedMovies();
 
-    const savedSearchUserMovies = localStorage.getItem("search-user");
-    const savedIsShortUserMovies = localStorage.getItem("isShort-user");
+    const savedSearch = localStorage.getItem("search-save");
+    const savedIsShort = localStorage.getItem("isShort-save");
 
-    if (savedSearchUserMovies) {
-      setSearch(savedSearchUserMovies);
-      setFilterString(savedSearchUserMovies);
+    if (savedSearch) {
+      setSearch(savedSearch);
+      setFilterString(savedSearch);
     }
 
-    if (savedIsShortUserMovies) {
-      setIsShort(savedIsShortUserMovies === "true");
+    if (savedIsShort) {
+      setIsShort(savedIsShort === "true");
     }
   }, []);
 
@@ -59,6 +59,7 @@ function SavedMovies({ isSavedMovies }) {
       setIsErrorSearch(true);
       return
     }
+
     setIsErrorSearch(false);
     setFilterString(search);
   }, []);
@@ -78,8 +79,8 @@ function SavedMovies({ isSavedMovies }) {
       }
       return nameRu.includes(str) || nameEn.includes(str)
     })
-    localStorage.setItem("search-user", filterString);
-    localStorage.setItem("isShort-user", String(isShort));
+    localStorage.setItem("search-save", filterString);
+    localStorage.setItem("isShort-save", String(isShort));
 
     return filtered;
   }, [filterString, savedMovies, isShort]);
@@ -94,7 +95,6 @@ function SavedMovies({ isSavedMovies }) {
       })
       .catch(err => {
         console.log(err);
-        console.log(movieId)
       });
   }
 
@@ -113,7 +113,6 @@ function SavedMovies({ isSavedMovies }) {
 
     if (filteredMovies.length !== 0) {
       setIsErrorCard(false);
-      return
     }
 
   }, [filteredMovies]);
@@ -130,7 +129,7 @@ function SavedMovies({ isSavedMovies }) {
         <Switch isOn={isShort} handleToggle={() => setIsShort(!isShort)} />
         <span className="switch-box__label">Короткометражки</span>
       </div>
-      {(isErrorCard || !isData) && <ErrorTooltip message={cardErrorMessage} />}
+      {(!isLoading && (isErrorCard || !isData)) && <ErrorTooltip message={cardErrorMessage} />}
       <MoviesCardList
         isLoading={isLoading}
         isData={isData}
