@@ -64,7 +64,8 @@ function App() {
     try {
       setLoading(true);
       const data = await MainApi.authorize(login, password);
-      if (!data) {
+      console.log('data in enterAccount', data)
+      if (!data || data.message === '') {
         setIsError(true);
         setErrorTooltipMessage(errorMessages.badRequest);
         throw new Error('Неверные логин или пароль');
@@ -76,6 +77,15 @@ function App() {
       }
     } catch (err) {
       console.log(err)
+      setIsError(true);
+      setErrorTooltipMessage(errorMessages.badRequest);
+      throw new Error('Неверные логин или пароль');
+    }
+    finally {
+      setLoading(false)
+      setTimeout(() => {
+        setIsError(false);
+      }, 2000)
     }
   }, [])
 

@@ -11,7 +11,7 @@
   font-size: 13px;
   line-height: 1.38;
   text-align: right;
-  color: #ffffff;
+  color: #000;
   text-decoration: none;
   align-self: center;
   font-weight: 400;
@@ -29,19 +29,6 @@
 .navigation__link_place_main {
   color: #ffffff;
 }
-
-/* .navigation__link_state_logged-in {
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 1.33;
-}
-
-.navigation__link_state_logged-out {
-  font-size: 13px;
-  line-height: 1.38;
-  text-align: right;
-  color: #000000;
-} */
 
 .navigation__link_type_button {
   display: flex;

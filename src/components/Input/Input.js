@@ -23,6 +23,7 @@ function InputField(props) {
         value={value}
         placeholder={placeholder}
         onChange={handleChange}
+        autoComplete="off"
       />
       {errorMessage && !isValid && (
         <span className="input__error-message">{errorMessage}</span>

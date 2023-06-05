@@ -68,7 +68,14 @@ function useFormWithValidationAndRender(formObj) {
     return isValid;
   }, [form]);
 
-  return { renderFormInputs, isFormValid, form };
+  const resetForm = useCallback(
+    (newValues = {}) => {
+      setValues(newValues);
+    },
+    [setValues]
+  );
+
+  return { renderFormInputs, isFormValid, form, resetForm };
 }
 
 export default useFormWithValidationAndRender;

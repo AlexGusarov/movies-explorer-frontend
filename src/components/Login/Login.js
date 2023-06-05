@@ -8,7 +8,7 @@ import './Login.css'
 
 function Login({ onLogin, isError, message, isLoading }) {
 
-  const { renderFormInputs, isFormValid, form } = useFormWithValidationAndRender(signinForm);
+  const { renderFormInputs, isFormValid, form, resetForm } = useFormWithValidationAndRender(signinForm);
   // изменить количество инпутов и параметры валидации можно в /utils/formConfig
 
   const handleSubmit = (evt) => {
@@ -20,11 +20,9 @@ function Login({ onLogin, isError, message, isLoading }) {
     if (!login || !password) {
       return;
     }
-    console.log('login data: ', login, password)
     onLogin(login, password);
 
-    // makeFormClear();
-    evt.target.reset();
+    resetForm();
   }
 
   return (

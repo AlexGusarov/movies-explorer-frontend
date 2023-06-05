@@ -15,7 +15,10 @@ function Navigation({ loggedIn, isMainPage }) {
       {(!loggedIn)
         ?
         <>
-          <HashLink smooth to="/signup/#logo" className="navigation__link navigation__link_state_logged-in">Регистрация</HashLink>
+          <HashLink smooth to="/signup/#logo"
+            className={`navigation__link 
+           ${isMainPage && 'navigation__link_place_main'}`
+            }>Регистрация</HashLink>
           <HashLink to="/signin/#logo" className="navigation__link navigation__link_type_button">Войти</HashLink>
         </>
         :

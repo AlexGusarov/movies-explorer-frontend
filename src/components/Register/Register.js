@@ -9,7 +9,7 @@ import './Register.css';
 
 function Register({ onRegister, isError, message, isLoading }) {
 
-  const { renderFormInputs, isFormValid, form } = useFormWithValidationAndRender(signupForm);
+  const { renderFormInputs, isFormValid, form, resetForm } = useFormWithValidationAndRender(signupForm);
   // изменить количество инпутов и параметры валидации можно в /utils/formConfig
 
   const handleSubmit = (evt) => {
@@ -24,8 +24,7 @@ function Register({ onRegister, isError, message, isLoading }) {
     }
 
     onRegister(name, email, password);
-
-    // makeFormClear();
+    resetForm();
     evt.target.reset();
   }
 

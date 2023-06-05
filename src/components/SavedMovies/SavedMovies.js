@@ -4,25 +4,30 @@ import { errorMessages } from "../../utils/constants";
 import Switch from "../Switch/Switch";
 import SearchForm from "../SearchForm/SearchForm";
 import MainApi from "../../utils/MainApi";
+import ErrorTooltip from "../ErrorTooltip/ErrorTooltip";
+
 
 function SavedMovies({ isSavedMovies }) {
-  const [userMovies, setUserMovies] = useState([]);
+  const [savedMovies, setSavedMovies] = useState([]);
   const [search, setSearch] = useState("");
   const [filterString, setFilterString] = useState(null);
   const [isShort, setIsShort] = useState(false);
   const [isErrorSearch, setIsErrorSearch] = useState(false);
+  const [isErrorCard, setIsErrorCard] = useState(false);
+  const [cardErrorMessage, setCardErrorMessage] = useState('')
   const [searchErrorMessage, setSearchErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isData, setIsData] = useState(true);
-  const { searchEmpty } = errorMessages;
+  const { searchEmpty, noData, notFound, noSavedMovies } = errorMessages;
 
 
   const getSavedMovies = useCallback(async () => {
     try {
       setIsLoading(true);
       const apiSavedMovies = await MainApi.getSavedMovies();
-      setUserMovies(apiSavedMovies);
+      setSavedMovies(apiSavedMovies);
     } catch (err) {
+      setCardErrorMessage(noData);
       setIsData(false);
     }
     finally {
@@ -63,7 +68,7 @@ function SavedMovies({ isSavedMovies }) {
     if (!filterString) {
       return [];
     }
-    const filtered = userMovies.filter((movie) => {
+    const filtered = savedMovies.filter((movie) => {
       const nameRu = movie.nameRU.toLowerCase();
       const nameEn = movie.nameEN.toLowerCase();
       const str = filterString.toLowerCase();
@@ -77,13 +82,13 @@ function SavedMovies({ isSavedMovies }) {
     localStorage.setItem("isShort-user", String(isShort));
 
     return filtered;
-  }, [filterString, userMovies, isShort]);
+  }, [filterString, savedMovies, isShort]);
 
 
   function handleDeleteMovie(id, movieId) {
     MainApi.deleteMovie(id)
       .then(() => {
-        setUserMovies(prev => {
+        setSavedMovies(prev => {
           return prev.filter(movie => movie.movieId !== movieId);
         })
       })
@@ -92,6 +97,26 @@ function SavedMovies({ isSavedMovies }) {
         console.log(movieId)
       });
   }
+
+  useEffect(() => {
+    if (filteredMovies.length === 0 && savedMovies.length === 0 && isData) {
+      setCardErrorMessage(noSavedMovies);
+      setIsErrorCard(true);
+      return
+    }
+
+    if (filteredMovies.length === 0 && savedMovies.length !== 0) {
+      setCardErrorMessage(notFound);
+      setIsErrorCard(true);
+      return
+    }
+
+    if (filteredMovies.length !== 0) {
+      setIsErrorCard(false);
+      return
+    }
+
+  }, [filteredMovies]);
 
 
   return (
@@ -105,6 +130,7 @@ function SavedMovies({ isSavedMovies }) {
         <Switch isOn={isShort} handleToggle={() => setIsShort(!isShort)} />
         <span className="switch-box__label">Короткометражки</span>
       </div>
+      {(isErrorCard || !isData) && <ErrorTooltip message={cardErrorMessage} />}
       <MoviesCardList
         isLoading={isLoading}
         isData={isData}
@@ -117,7 +143,7 @@ function SavedMovies({ isSavedMovies }) {
         handleSubmitSearch={handleSubmitSearch}
         moviesToRender={filteredMovies}
         onDelete={handleDeleteMovie}
-        savedMovies={userMovies}
+        savedMovies={savedMovies}
         isSavedMovies={isSavedMovies}
       />
     </>

@@ -25,7 +25,11 @@ function Profile({ onProfile, onLogout }) {
     setTimeout(() => setIsSuccess(false), 3000);
   }
 
-  const handleLogout = () => onLogout();
+  const handleLogout = () => {
+    localStorage.clear();
+    onLogout();
+  }
+
 
   const isDisabled = !isValid
     || ((currentUser.name === values.name) &&

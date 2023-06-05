@@ -1,11 +1,11 @@
 import { useEffect, useState, useCallback, useMemo } from "react";
 import MoviesCardList from "../MoviesCardList/MoviesCardList";
 import moviesApi from "../../utils/MoviesApi";
-import { errorMessages } from "../../utils/constants";
 import Switch from "../Switch/Switch";
 import SearchForm from "../SearchForm/SearchForm";
 import MainApi from "../../utils/MainApi";
-import { MOVIE__IMAGES_URL } from '../../utils/constants';
+import { MOVIE__IMAGES_URL, errorMessages } from '../../utils/constants';
+import ErrorTooltip from "../ErrorTooltip/ErrorTooltip";
 
 
 function Movies({ isSavedMovies }) {
@@ -16,12 +16,15 @@ function Movies({ isSavedMovies }) {
   const [filterString, setFilterString] = useState(null);
   const [isShort, setIsShort] = useState(false);
   const [isErrorSearch, setIsErrorSearch] = useState(false);
+  const [isErrorCard, setIsErrorCard] = useState(false);
   const [searchErrorMessage, setSearchErrorMessage] = useState('');
+  const [cardErrorMessage, setCardErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isData, setIsData] = useState(true);
   const [page, setPage] = useState(1);
   const [screenWidth, setScreenWidth] = useState(window.innerWidth);
-  const { searchEmpty } = errorMessages;
+  const { searchEmpty, notFound, noData } = errorMessages;
+  const [isInitMount, setIsInitMount] = useState(true);
 
 
   const handleResize = useCallback(() => {
@@ -49,6 +52,7 @@ function Movies({ isSavedMovies }) {
       const response = await moviesApi.getAllMovies();
       setMovies(response);
     } catch (err) {
+      setCardErrorMessage(noData);
       setIsData(false);
     }
     finally {
@@ -94,6 +98,7 @@ function Movies({ isSavedMovies }) {
       setIsErrorSearch(true);
       return
     }
+
     setIsErrorSearch(false);
     setFilterString(search);
   }, []);
@@ -129,17 +134,17 @@ function Movies({ isSavedMovies }) {
 
   function handleSaveMovie(data) {
     MainApi.saveMovie({
-      country: data.country ? data.country : 'No country',
-      director: data.director ? data.director : 'No director',
-      duration: data.duration ? data.duration : 0,
-      year: data.year ? data.year : '0000',
-      description: data.description ? data.description.slice(0, 1000) : 'No description',
-      image: data.image.url ? MOVIE__IMAGES_URL + data.image.url : 'No image link',
-      trailerLink: data.trailerLink ? data.trailerLink : 'No trailer link',
-      thumbnail: data.image.formats.thumbnail.url ? MOVIE__IMAGES_URL + data.image.formats.thumbnail.url : 'No info image',
+      country: data.country,
+      director: data.director,
+      duration: data.duration,
+      year: data.year,
+      description: data.description,
+      image: MOVIE__IMAGES_URL + data.image.url,
+      trailerLink: data.trailerLink,
+      thumbnail: MOVIE__IMAGES_URL + data.image.formats.thumbnail.url,
       movieId: data.id,
-      nameRU: data.nameRU ? data.nameRU : 'No nameRU',
-      nameEN: data.nameEN ? data.nameEN : 'No nameEN',
+      nameRU: data.nameRU,
+      nameEN: data.nameEN,
     })
       .then((savedMovie) => {
         setSavedMovies(prev => {
@@ -166,6 +171,17 @@ function Movies({ isSavedMovies }) {
       });
   }
 
+  useEffect(() => {
+    if (isInitMount) {
+      setIsInitMount(false)
+    } else {
+      if (!isLoading && filteredMovies.length === 0) {
+        setCardErrorMessage(notFound)
+        setIsErrorCard(true)
+      } else { setIsErrorCard(false) }
+    }
+  }, [filteredMovies])
+
 
   return (
     <>
@@ -178,9 +194,11 @@ function Movies({ isSavedMovies }) {
         <Switch isOn={isShort} handleToggle={() => setIsShort(!isShort)} />
         <span className="switch-box__label">Короткометражки</span>
       </div>
+      {(isErrorCard || !isData) && <ErrorTooltip message={cardErrorMessage} />}
       <MoviesCardList
         isLoading={isLoading}
         isData={isData}
+        isErrorCard={isErrorCard}
         isShort={isShort}
         setIsShot={setIsShort}
         isErrorSearch={isErrorSearch}
@@ -194,6 +212,7 @@ function Movies({ isSavedMovies }) {
         onDelete={handleDeleteMovie}
         savedMovies={savedMovies}
         isSavedMovies={isSavedMovies}
+        filterString={filterString}
       />
     </>
   )

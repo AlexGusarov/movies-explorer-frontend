@@ -13,18 +13,14 @@ function MoviesCardList({
   onSave,
   onDelete,
   savedMovies,
-  isSavedMovies }) {
+  isSavedMovies,
 
-  const { notFound, noData } = errorMessages;
-
+}) {
 
   return (
     <section className="movies-card-list">
       {isLoading && <Preloader />}
       <ul className="movies-card-list__list">
-        {(!isLoading && filteredMovies.length === 0 && !isSavedMovies) &&
-          (<span className="movies-card-list__error">{isData ? notFound : noData}</span>)
-        }
         {moviesToRender.map(item => {
           const isSaved = savedMovies.some(savedMovie => savedMovie.movieId === item.id);
 
@@ -46,6 +42,7 @@ function MoviesCardList({
         >Ещё
         </button>
       )}
+
     </section>
   )
 };
