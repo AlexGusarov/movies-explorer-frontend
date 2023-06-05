@@ -126,7 +126,7 @@ function Movies({ isSavedMovies }) {
 
 
   const moviesToRender = useMemo(() => {
-    const countToRender = screenWidth < 768 ? 5 : screenWidth < 1280 ? 8 : 12;
+    const countToRender = screenWidth < 650 ? 5 : screenWidth < 1100 ? 8 : 12;
 
     return filteredMovies.slice(0, countToRender * page);
   }, [filteredMovies, page, screenWidth]);
