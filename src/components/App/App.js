@@ -127,7 +127,9 @@ function App() {
 
   const handleLogout = useCallback(() => {
     setLoggedIn(false);
-    localStorage.removeItem('token');
+    localStorage.clear();
+    setSavedMovies([]);
+    setCurrentUser({});
   }, [])
 
 

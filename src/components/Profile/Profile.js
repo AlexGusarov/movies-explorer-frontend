@@ -25,12 +25,6 @@ function Profile({ onProfile, onLogout }) {
     setTimeout(() => setIsSuccess(false), 3000);
   }
 
-  const handleLogout = () => {
-    localStorage.clear();
-    onLogout();
-  }
-
-
   const isDisabled = !isValid
     || ((currentUser.name === values.name) &&
       (currentUser.email === values.email));
@@ -91,7 +85,7 @@ function Profile({ onProfile, onLogout }) {
         >Редактировать</button>
         <button
           className="profile__button-exit"
-          onClick={handleLogout}
+          onClick={onLogout}
         >Выйти из аккаунта</button>
       </form>
     </section>

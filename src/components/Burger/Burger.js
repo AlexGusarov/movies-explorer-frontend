@@ -32,43 +32,45 @@ function Burger({ isMainPage }) {
         <span className={buttonLineClass}></span>
       </div>
       <div
+        onClick={handleCloseMenu}
         className={
           `burger__menu-container 
         ${isActive && 'burger__menu-container_active'
-          }`}>
-        <ul className={`burger__menu ${isActive && 'burger__menu_active'}`}
-          onClick={handleCloseMenu}
-        >
-          <li className="burger__item">
-            <NavLink
-              to="/"
-              className={({ isActive }) =>
-                isActive ? "burger__link burger__link_active" : "burger__link"
-              } >Главная</NavLink>
-          </li>
-          <li className="burger__item">
-            <NavLink
-              to="/movies"
-              className={({ isActive }) =>
-                isActive ? "burger__link burger__link_active" : "burger__link"
-              }>Фильмы</NavLink>
-          </li>
-          <li className="burger__item">
-            <NavLink
-              to="/saved-movies"
-              className={({ isActive }) =>
-                isActive ? "burger__link burger__link_active" : "burger__link"
-              }>Сохраненные фильмы</NavLink>
-          </li>
-          <li className="burger__item">
-            <NavLink
-              to="/profile"
-              className="burger__link">
-              {<ProfileIcon />}
-            </NavLink>
-          </li>
-        </ul>
-      </div>
+          }`} />
+      <ul className={`burger__menu ${isActive && 'burger__menu_active'}`} >
+        <li className="burger__item">
+          <NavLink
+            to="/"
+            onClick={handleCloseMenu}
+            className={({ isActive }) =>
+              isActive ? "burger__link burger__link_active" : "burger__link"
+            } >Главная</NavLink>
+        </li>
+        <li className="burger__item">
+          <NavLink
+            to="/movies"
+            onClick={handleCloseMenu}
+            className={({ isActive }) =>
+              isActive ? "burger__link burger__link_active" : "burger__link"
+            }>Фильмы</NavLink>
+        </li>
+        <li className="burger__item">
+          <NavLink
+            to="/saved-movies"
+            onClick={handleCloseMenu}
+            className={({ isActive }) =>
+              isActive ? "burger__link burger__link_active" : "burger__link"
+            }>Сохраненные фильмы</NavLink>
+        </li>
+        <li className="burger__item">
+          <NavLink
+            to="/profile"
+            onClick={handleCloseMenu}
+            className="burger__link">
+            {<ProfileIcon />}
+          </NavLink>
+        </li>
+      </ul>
     </>
   )
 };
