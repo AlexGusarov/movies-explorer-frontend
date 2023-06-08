@@ -16,16 +16,11 @@ function SearchForm({ onSearch, searchErrorMessage, isError }) {
   }
 
   useEffect(() => {
-    // const savedMoviesSearch = localStorage.getItem('search-save');
     const moviesSearch = localStorage.getItem('search');
 
     if (location === 'movies') {
       setValues({ search: moviesSearch });
     }
-
-    // if (location === 'saved-movies') {
-    //   setValues({ search: savedMoviesSearch });
-    // }
   }, [])
 
   return (

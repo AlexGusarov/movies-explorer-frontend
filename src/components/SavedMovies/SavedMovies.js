@@ -38,28 +38,10 @@ function SavedMovies({ isSavedMovies }) {
 
   useEffect(() => {
     getSavedMovies();
-
-    // const savedSearch = localStorage.getItem("search-save");
-    // const savedIsShort = localStorage.getItem("isShort-save");
-
-    // if (savedSearch) {
-    //   setSearch(savedSearch);
-    //   setFilterString(savedSearch);
-    // }
-
-    // if (savedIsShort) {
-    //   setIsShort(savedIsShort === "true");
-    // }
   }, []);
 
 
   const handleSubmitSearch = useCallback(async (search) => {
-    // if (!search) {
-    //   setSearchErrorMessage(searchEmpty);
-    //   setIsErrorSearch(true);
-    //   return
-    // }
-
     setIsErrorSearch(false);
     setFilterString(search);
   }, []);
@@ -79,8 +61,6 @@ function SavedMovies({ isSavedMovies }) {
       }
       return nameRu.includes(str) || nameEn.includes(str)
     })
-    // localStorage.setItem("search-save", filterString);
-    // localStorage.setItem("isShort-save", String(isShort));
 
     return filtered;
   }, [filterString, savedMovies, isShort]);

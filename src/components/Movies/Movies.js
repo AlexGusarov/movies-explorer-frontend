@@ -167,7 +167,6 @@ function Movies({ isSavedMovies }) {
       })
       .catch(err => {
         console.log(err);
-        console.log(movieId)
       });
   }
 
