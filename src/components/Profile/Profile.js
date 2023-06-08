@@ -44,7 +44,7 @@ function Profile({ onProfile, onLogout, isError, isSuccess }) {
               placeholder="Имя"
               required
               value={values.name || ""}
-              minLength={4}
+              minLength={3}
               maxLength={30}
               pattern="[a-zA-Zа-яА-Я \-]+"
               autoComplete="off"

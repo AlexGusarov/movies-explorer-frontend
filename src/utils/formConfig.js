@@ -40,7 +40,7 @@ export const signupForm = {
     validationRules: [
       requiredRule("name"),
       minLengthRule("Имя", 3),
-      maxLengthRule("Имя", 25),
+      maxLengthRule("Имя", 30),
       nameValidRule()
     ]
   },
@@ -48,7 +48,7 @@ export const signupForm = {
     ...createFormFieldConfig("E-mail", "email", "email", "ipetrov@email.com"),
     validationRules: [
       requiredRule("email"),
-      minLengthRule("E-mail", 10),
+      minLengthRule("E-mail", 8),
       maxLengthRule("E-mail", 25),
       emailValidRule()
     ]
