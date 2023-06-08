@@ -23,6 +23,8 @@ function App() {
   const [currentUser, setCurrentUser] = useState({});
   const [savedMovies, setSavedMovies] = useState([]);
   const [isAppStart, setIsAppStart] = useState(false);
+  const [isErrorProfile, setIsErrorProfile] = useState(false);
+  const [isSuccessEdit, setIsSuccessEdit] = useState(false);
 
   const location = useLocation().pathname.slice(1);
   const navigate = useNavigate();
@@ -90,9 +92,18 @@ function App() {
 
 
   const handleProfileSubmit = useCallback(({ name, email }) => {
-    MainApi.updateUser({ name, email });
+    setIsErrorProfile(false);
 
-    setCurrentUser({ name, email });
+    MainApi.updateUser({ name, email })
+      .then(() => {
+        setCurrentUser({ name, email });
+        setIsSuccessEdit(true);
+        setTimeout(() => { setIsSuccessEdit(false) }, 3000);
+      })
+      .catch((err) => {
+        console.log(err);
+        setIsErrorProfile(true);
+      })
   }, [])
 
 
@@ -179,6 +190,8 @@ function App() {
                   <Profile
                     onProfile={handleProfileSubmit}
                     onLogout={handleLogout}
+                    isError={isErrorProfile}
+                    isSuccess={isSuccessEdit}
                   />
                 </ProtectedRoute>
               } />

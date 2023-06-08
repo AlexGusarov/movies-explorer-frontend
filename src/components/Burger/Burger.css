@@ -4,7 +4,7 @@
   border: none;
   background-color: transparent;
   position: relative;
-  z-index: 2;
+  z-index: 5;
   overflow: hidden;
   cursor: pointer;
 }
