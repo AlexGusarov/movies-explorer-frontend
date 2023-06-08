@@ -76,7 +76,7 @@ function Movies({ isSavedMovies }) {
 
   useEffect(() => {
     fetchMovies();
-    getSavedMovies()
+    getSavedMovies();
 
     const savedSearch = localStorage.getItem("search");
     const savedIsShort = localStorage.getItem("isShort");
@@ -189,6 +189,7 @@ function Movies({ isSavedMovies }) {
         onSearch={handleSubmitSearch}
         searchErrorMessage={searchErrorMessage}
         isError={isErrorSearch}
+        search={search}
       />
       <div className="switch-box">
         <Switch isOn={isShort} handleToggle={() => setIsShort(!isShort)} />

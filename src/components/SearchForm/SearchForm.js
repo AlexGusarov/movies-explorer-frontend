@@ -1,24 +1,32 @@
 import './SearchForm.css';
 import { useForm } from '../../hooks/useForm';
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
+
 
 function SearchForm({ onSearch, searchErrorMessage, isError }) {
   const { values, handleChange, setValues } = useForm();
-
-  const makeFormClear = () => {
-    setValues({});
-  }
+  const location = useLocation().pathname.slice(1);
 
   const handleSubmit = (evt) => {
     evt.preventDefault();
 
     const searchRequest = values.search;
-
     onSearch(searchRequest);
-
-    makeFormClear();
-    evt.target.reset();
   }
 
+  useEffect(() => {
+    // const savedMoviesSearch = localStorage.getItem('search-save');
+    const moviesSearch = localStorage.getItem('search');
+
+    if (location === 'movies') {
+      setValues({ search: moviesSearch });
+    }
+
+    // if (location === 'saved-movies') {
+    //   setValues({ search: savedMoviesSearch });
+    // }
+  }, [])
 
   return (
     <section className="search">

@@ -64,7 +64,6 @@ function App() {
     try {
       setLoading(true);
       const data = await MainApi.authorize(login, password);
-      console.log('data in enterAccount', data)
       if (!data || data.message === '') {
         setIsError(true);
         setErrorTooltipMessage(errorMessages.badRequest);
@@ -119,7 +118,7 @@ function App() {
     }
     catch (error) {
       setIsAppStart(true);
-      console.log('tokenCheck', error);
+      console.log(error);
     } finally {
       setLoading(false);
     }

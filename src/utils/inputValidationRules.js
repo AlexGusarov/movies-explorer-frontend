@@ -35,7 +35,7 @@ export function nameValidRule() {
   return createValidationRule(
     "nameValid",
     "В имени разрешены только буквы и пробел",
-    (inputValue) => /[a-zA-Zа-яА-Я\s-]+/.test(inputValue)
+    (inputValue) => /[a-zA-Zа-яА-Я \-]+/.test(inputValue)
   );
 }
 
