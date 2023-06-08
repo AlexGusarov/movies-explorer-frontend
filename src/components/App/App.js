@@ -12,11 +12,13 @@ import Profile from '../Profile/Profile';
 import MainApi from '../../utils/MainApi';
 import { errorMessages } from '../../utils/constants';
 import { ProtectedRoute } from '../ProtectedRoute/ProtectedRoute';
+import CommonRoute from '../CommonRoute/CommonRoute';
 import { CurrentUserContext } from '../../contexts/CurrentUserContext';
 import './App.css';
 
 function App() {
   const [loggedIn, setLoggedIn] = useState(false);
+  const [isAuthenticated, setIsAuthenticated] = useState(false);
   const [loading, setLoading] = useState(false);
   const [isError, setIsError] = useState(false);
   const [errorTooltipMessage, setErrorTooltipMessage] = useState("");
@@ -73,6 +75,7 @@ function App() {
       }
       if (data.token) {
         setLoggedIn(true);
+        setIsAuthenticated(true);
         localStorage.setItem('token', data.token);
         navigate('/movies');
       }
@@ -123,6 +126,7 @@ function App() {
         if (user) {
           setLoggedIn(true);
           setCurrentUser(user);
+          setIsAuthenticated(true);
           setIsAppStart(true);
         }
       }
@@ -138,6 +142,7 @@ function App() {
 
   const handleLogout = useCallback(() => {
     setLoggedIn(false);
+    setIsAuthenticated(false);
     localStorage.clear();
     setSavedMovies([]);
     setCurrentUser({});
@@ -158,19 +163,23 @@ function App() {
             <Routes>
               <Route path="/" element={<Main />} />
               <Route path="/signup" element={
-                <Register
-                  onRegister={registerUser}
-                  isError={isError}
-                  message={errorTooltipMessage}
-                  isLoading={loading}
-                />} />
+                <CommonRoute isAuthenticated={isAuthenticated}>
+                  <Register
+                    onRegister={registerUser}
+                    isError={isError}
+                    message={errorTooltipMessage}
+                    isLoading={loading}
+                  />
+                </CommonRoute>} />
               <Route path="/signin" element={
-                <Login
-                  onLogin={enterAccount}
-                  isError={isError}
-                  message={errorTooltipMessage}
-                  isLoading={loading}
-                />} />
+                <CommonRoute isAuthenticated={isAuthenticated}>
+                  <Login
+                    onLogin={enterAccount}
+                    isError={isError}
+                    message={errorTooltipMessage}
+                    isLoading={loading}
+                  />
+                </CommonRoute>} />
               <Route path="/movies" element={
                 <ProtectedRoute loggedIn={loggedIn}>
                   <Movies
