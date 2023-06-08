@@ -11,11 +11,14 @@
 
 
 .error-tooltip {
-  width: 50%;
   margin-top: 20px;
+  display: flex;
+  justify-content: center;
 }
 
 .error-tooltip__message {
+  display: inline-block;
+  width: 50%;
   color: #FF3055;
   font-family: 'Inter', 'Arial', sans-serif;
   font-style: normal;
