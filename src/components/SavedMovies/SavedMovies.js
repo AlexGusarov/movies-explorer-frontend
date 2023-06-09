@@ -48,13 +48,13 @@ function SavedMovies({ isSavedMovies }) {
 
 
   const filteredMovies = useMemo(() => {
-    if (!filterString || filterString === "") {
+    if (!filterString && !isShort) {
       return savedMovies;
     }
     const filtered = savedMovies.filter((movie) => {
-      const nameRu = movie.nameRU.toLowerCase();
-      const nameEn = movie.nameEN.toLowerCase();
-      const str = filterString.toLowerCase();
+      const nameRu = movie.nameRU?.toLowerCase();
+      const nameEn = movie.nameEN?.toLowerCase();
+      const str = filterString?.toLowerCase();
 
       if (isShort && movie.duration > 40) {
         return false;
@@ -77,6 +77,7 @@ function SavedMovies({ isSavedMovies }) {
         console.log(err);
       });
   }
+
 
   useEffect(() => {
     if (filteredMovies.length === 0 && savedMovies.length === 0 && isData) {
