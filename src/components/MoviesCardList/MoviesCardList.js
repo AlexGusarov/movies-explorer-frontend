@@ -1,11 +1,9 @@
 import MoviesCard from "../MoviesCard/MoviesCard";
-import { errorMessages } from "../../utils/constants";
 import Preloader from "../Preloader/Preloader";
 import './MoviesCardList.css';
 
 function MoviesCardList({
   isLoading,
-  isData,
   isButtonMoreNeed,
   filteredMovies,
   moviesToRender,

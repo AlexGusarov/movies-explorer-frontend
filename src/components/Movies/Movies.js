@@ -197,10 +197,7 @@ function Movies({ isSavedMovies }) {
       {(isErrorCard || !isData) && <ErrorTooltip message={cardErrorMessage} />}
       <MoviesCardList
         isLoading={isLoading}
-        isData={isData}
         isErrorCard={isErrorCard}
-        isShort={isShort}
-        setIsShot={setIsShort}
         isErrorSearch={isErrorSearch}
         isButtonMoreNeed={true}
         searchErrorMessage={searchErrorMessage}

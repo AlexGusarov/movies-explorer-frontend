@@ -56,10 +56,15 @@ function SavedMovies({ isSavedMovies }) {
       const nameEn = movie.nameEN?.toLowerCase();
       const str = filterString?.toLowerCase();
 
-      if (isShort && movie.duration > 40) {
-        return false;
+      if (isShort) {
+        if (movie.duration && movie.duration > 40) {
+          return false;
+        }
       }
-      return nameRu.includes(str) || nameEn.includes(str)
+
+      const nameMatches = (!str || nameRu.includes(str) || nameEn.includes(str));
+
+      return nameMatches;
     })
 
     return filtered;
@@ -113,9 +118,6 @@ function SavedMovies({ isSavedMovies }) {
       {(!isLoading && (isErrorCard || !isData)) && <ErrorTooltip message={cardErrorMessage} />}
       <MoviesCardList
         isLoading={isLoading}
-        isData={isData}
-        isShort={isShort}
-        setIsShot={setIsShort}
         isErrorSearch={isErrorSearch}
         isButtonMoreNeed={false}
         searchErrorMessage={searchErrorMessage}
