@@ -1,5 +1,5 @@
 import "./Profile.css";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useEffect } from "react";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { useFormWithValidation } from "../../hooks/UseFormWithValidation";
 import ErrorTooltip from "../ErrorTooltip/ErrorTooltip";

@@ -9,16 +9,14 @@ import ErrorTooltip from "../ErrorTooltip/ErrorTooltip";
 
 function SavedMovies({ isSavedMovies }) {
   const [savedMovies, setSavedMovies] = useState([]);
-  const [search, setSearch] = useState("");
   const [filterString, setFilterString] = useState(null);
   const [isShort, setIsShort] = useState(false);
   const [isErrorSearch, setIsErrorSearch] = useState(false);
   const [isErrorCard, setIsErrorCard] = useState(false);
-  const [cardErrorMessage, setCardErrorMessage] = useState('')
-  const [searchErrorMessage, setSearchErrorMessage] = useState('');
+  const [cardErrorMessage, setCardErrorMessage] = useState('');
   const [isLoading, setIsLoading] = useState(false);
   const [isData, setIsData] = useState(true);
-  const { searchEmpty, noData, notFound, noSavedMovies } = errorMessages;
+  const { noData, notFound, noSavedMovies } = errorMessages;
 
 
   const getSavedMovies = useCallback(async () => {
@@ -108,7 +106,6 @@ function SavedMovies({ isSavedMovies }) {
     <>
       <SearchForm
         onSearch={handleSubmitSearch}
-        searchErrorMessage={searchErrorMessage}
         isError={isErrorSearch}
       />
       <div className="switch-box">
@@ -120,7 +117,6 @@ function SavedMovies({ isSavedMovies }) {
         isLoading={isLoading}
         isErrorSearch={isErrorSearch}
         isButtonMoreNeed={false}
-        searchErrorMessage={searchErrorMessage}
         filteredMovies={filteredMovies}
         handleSubmitSearch={handleSubmitSearch}
         moviesToRender={filteredMovies}

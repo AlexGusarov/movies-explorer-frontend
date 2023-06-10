@@ -21,7 +21,7 @@ function SearchForm({ onSearch, searchErrorMessage, isError }) {
     if (location === 'movies') {
       setValues({ search: moviesSearch });
     }
-  }, [])
+  }, [location, setValues])
 
   return (
     <section className="search">
