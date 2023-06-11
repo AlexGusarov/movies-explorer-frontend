@@ -1,0 +1,24 @@
+@keyframes ani {
+  0% {
+    opacity: 0;
+  }
+
+  100% {
+    opacity: 1;
+  }
+}
+
+.movies__error {
+  display: block;
+  color: #FF3055;
+  padding: 20px;
+  text-align: center;
+  font-family: 'Inter', 'Arial', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 14px;
+  line-height: 1.2;
+  opacity: 0;
+  animation: ani 0.8s forwards;
+  margin: 0 auto;
+}

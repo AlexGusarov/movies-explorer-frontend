@@ -1,8 +1,32 @@
 import { Link } from 'react-router-dom';
 import Logo from '../Logo/Logo';
+import useFormWithValidationAndRender from "../../hooks/useFormWithValidationAndRender";
+import { signupForm } from "../../utils/formConfig";
+import ErrorTooltip from '../ErrorTooltip/ErrorTooltip';
+import Preloader from '../Preloader/Preloader';
+
 import './Register.css';
 
-function Register() {
+function Register({ onRegister, isError, message, isLoading }) {
+
+  const { renderFormInputs, isFormValid, form, resetForm } = useFormWithValidationAndRender(signupForm);
+  // изменить количество инпутов и параметры валидации можно в /utils/formConfig
+
+  const handleSubmit = (evt) => {
+    evt.preventDefault();
+
+    const name = form.name.value;
+    const email = form.email.value;
+    const password = form.password.value;
+
+    if (!name || !email || !password) {
+      return;
+    }
+
+    onRegister(name, email, password);
+    resetForm();
+    evt.target.reset();
+  }
 
   return (
     <>
@@ -10,39 +34,11 @@ function Register() {
         <div className="register__container">
           <Logo />
           <p className="register__title">Добро пожаловать!</p>
-          <form className="register__form">
-            <label className="register__label" htmlFor="name">Имя</label>
-            <input
-              className="register__input"
-              type="text"
-              name="name"
-              id="name"
-              placeholder="Иван Петров"
-              required
-            >
-            </input>
-            <span className="register__error register__error_visible"></span>
-            <label className="register__label" htmlFor="email">E-mail</label>
-            <input
-              className="register__input"
-              type="email"
-              name="email"
-              id="email"
-              placeholder="ivpetrov@ya.ru"
-              required
-            >
-            </input>
-            <label className="register__label" htmlFor="password">Пароль</label>
-            <input
-              className="register__input register__input-error"
-              type="password"
-              name="password"
-              id="password"
-              required
-            >
-            </input>
-            <span className="register__error register__error_visible">Что-то пошло не так...</span>
-            <button type="submit" className="register__submit">Зарегистрироваться</button>
+          <form className="register__form" onSubmit={handleSubmit}>
+            {renderFormInputs()}
+            {isError && (<ErrorTooltip message={message} />)}
+            {isLoading && <Preloader />}
+            <button type="submit" className="register__submit" disabled={!isFormValid()}>Зарегистрироваться</button>
           </form>
           <div className="register__footer">
             <span className="register__question">Уже зарегистрированы?</span>

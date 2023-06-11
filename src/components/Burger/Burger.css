@@ -4,7 +4,7 @@
   border: none;
   background-color: transparent;
   position: relative;
-  z-index: 2;
+  z-index: 5;
   overflow: hidden;
   cursor: pointer;
 }
@@ -29,6 +29,10 @@
   transform: translate(-50%, -50%);
   background-color: #000;
   transition: all 0.5s;
+}
+
+.burger-button__line_place_main {
+  background-color: #fff;
 }
 
 .burger-button__line:nth-of-type(2) {

@@ -8,7 +8,10 @@
 .navigation__link {
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-style: normal;
-  color: #FFFFFF;
+  font-size: 13px;
+  line-height: 1.38;
+  text-align: right;
+  color: #000;
   text-decoration: none;
   align-self: center;
   font-weight: 400;
@@ -23,17 +26,8 @@
   font-weight: 500;
 }
 
-.navigation__link_state_logged-in {
-  font-weight: 500;
-  font-size: 12px;
-  line-height: 1.33;
-}
-
-.navigation__link_state_logged-out {
-  font-size: 13px;
-  line-height: 1.38;
-  text-align: right;
-  color: #000000;
+.navigation__link_place_main {
+  color: #ffffff;
 }
 
 .navigation__link_type_button {
@@ -72,7 +66,7 @@
 
 @media (max-width: 680px) {
 
-  .navigation__link_state_logged-in {
+  .navigation__link {
     font-size: 10px;
     line-height: 1.6;
   }

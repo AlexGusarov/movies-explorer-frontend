@@ -5,7 +5,7 @@ import ProfileIcon from '../ProfileIcon/ProfileIcon';
 import Burger from '../Burger/Burger';
 import './Navigation.css';
 
-function Navigation({ loggedIn }) {
+function Navigation({ loggedIn, isMainPage }) {
 
   const isDesktopOrLaptop = useMediaQuery({ minWidth: 1224 })
   const isTabletOrMobile = useMediaQuery({ maxWidth: 1224 })
@@ -15,7 +15,10 @@ function Navigation({ loggedIn }) {
       {(!loggedIn)
         ?
         <>
-          <HashLink smooth to="/signup/#logo" className="navigation__link navigation__link_state_logged-in">Регистрация</HashLink>
+          <HashLink smooth to="/signup/#logo"
+            className={`navigation__link 
+           ${isMainPage && 'navigation__link_place_main'}`
+            }>Регистрация</HashLink>
           <HashLink to="/signin/#logo" className="navigation__link navigation__link_type_button">Войти</HashLink>
         </>
         :
@@ -25,22 +28,22 @@ function Navigation({ loggedIn }) {
               <>
                 <div className='navigation__link-wrapper'>
                   <NavLink to="/movies" className={({ isActive }) =>
-                    isActive
-                      ? "navigation__link navigation__link_state_logged-out navigation__link_active"
-                      : "navigation__link navigation__link_state_logged-out"
-                  }>Фильмы</NavLink>
+                    `navigation__link 
+                    ${isActive && 'navigation__link_active'}
+                    ${isMainPage && 'navigation__link_place_main'}`}
+                  >Фильмы</NavLink>
                   <NavLink to="/saved-movies" className={({ isActive }) =>
-                    isActive
-                      ? "navigation__link navigation__link_state_logged-out navigation__link_active"
-                      : "navigation__link navigation__link_state_logged-out"
-                  }>Сохраненные фильмы</NavLink>
+                    `navigation__link
+                     ${isActive && 'navigation__link_active'}
+                     ${isMainPage && 'navigation__link_place_main'}`}
+                  >Сохраненные фильмы</NavLink>
                 </div>
                 <Link to="/profile" className="navigation__link navigation__link-profile">
                   {<ProfileIcon />}
                 </Link>
               </>
             )}
-            {isTabletOrMobile && <Burger />}
+            {isTabletOrMobile && <Burger isMainPage={isMainPage} />}
           </div>
         </>
       }
