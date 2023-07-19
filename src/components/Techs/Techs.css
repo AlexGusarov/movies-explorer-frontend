@@ -141,8 +141,4 @@
     padding: 0 50px;
   }
 
-  .techs__list-item:last-of-type {
-    margin: 0 auto 0 2%;
-  }
-
 }
