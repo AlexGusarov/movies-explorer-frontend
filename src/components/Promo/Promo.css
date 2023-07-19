@@ -1,5 +1,5 @@
 .promo {
-  background-image: url('../../images/landing-logo.svg');
+  background-image: url('../../images/LogoPortfolio.svg');
   background-repeat: no-repeat;
   background-color: #073042;
   background-position: center center;
@@ -9,6 +9,8 @@
   align-items: center;
   padding: 184px 0 224px;
   box-sizing: border-box;
+  display: flex;
+  flex-direction: column;
 }
 
 .promo__title {
@@ -17,6 +19,19 @@
   font-style: normal;
   font-weight: 400;
   font-size: 50px;
+  line-height: 1.16;
+  text-align: center;
+  letter-spacing: -0.04em;
+  color: #FFFFFF;
+  max-width: 730px;
+}
+
+.promo__subtitle {
+  margin: 0;
+  font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
+  font-style: normal;
+  font-weight: 400;
+  font-size: 36px;
   line-height: 1.16;
   text-align: center;
   letter-spacing: -0.04em;
@@ -39,5 +54,9 @@
   .promo__title {
     font-size: 31px;
     line-height: 1.26;
+  }
+
+  .promo__subtitle {
+    font-size: 26px;
   }
 }

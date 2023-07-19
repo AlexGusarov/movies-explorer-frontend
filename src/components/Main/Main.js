@@ -9,9 +9,10 @@ function Main() {
     <>
       <Promo />
       <NavTab />
-      <AboutProject />
       <Techs />
       <AboutMe />
+      <AboutProject />
+
     </>
   );
 };

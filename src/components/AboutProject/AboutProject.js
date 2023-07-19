@@ -1,3 +1,4 @@
+import { Link } from 'react-router-dom';
 import SectionHeading from '../SectionHeading/SectionHeading';
 import './AboutProject.css';
 
@@ -8,18 +9,18 @@ function AboutProject() {
       <ul className="about-project__list">
         <li className="about-project__list-item">
           <h3 className="about-project__list-title">
-            Дипломный проект включал 5&nbsp;этапов
+            Сервис просмотра базы фильмов
           </h3>
           <p className="about-project__list-text">
-            Составление плана, работу над бэкендом, вёрстку, добавление функциональности и&nbsp;финальные доработки.
+            Это пример моей работы. Макет — «Яндекс Практикум». Чтобы получить доступ, надо <Link to="/signup"> зарегистрироваться</Link>.
           </p>
         </li>
         <li className="about-project__list-item">
           <h3 className="about-project__list-title">
-            На выполнение диплома ушло 5&nbsp;недель
+            Проект включал 5&nbsp;этапов
           </h3>
           <p className="about-project__list-text">
-            У каждого этапа был мягкий и&nbsp;жёсткий дедлайн, которые нужно было соблюдать, чтобы успешно защититься.
+            Составление плана, работу над бэкендом, вёрстку, добавление функциональности и&nbsp;финальные доработки.
           </p>
         </li>
       </ul>

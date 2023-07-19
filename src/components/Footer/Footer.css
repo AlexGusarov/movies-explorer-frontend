@@ -51,14 +51,15 @@
   gap: 20px;
 }
 
-.footer__link {
+.footer__link,
+.footer__item {
+  text-decoration: none;
   font-family: 'Inter', 'Arial', 'Helvetica', sans-serif;
   font-style: normal;
   font-weight: 400;
   font-size: 13px;
   line-height: 1.23;
   color: #000000;
-  text-decoration: none;
 }
 
 .footer__link:hover {
@@ -78,6 +79,7 @@
   }
 
   .footer__link,
+  .footer__item,
   .footer__copyright,
   .footer__text {
     font-size: 12px;

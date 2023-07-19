@@ -38,7 +38,7 @@ function Movies({ isSavedMovies }) {
     return () => {
       window.removeEventListener("resize", handleResize);
     };
-  }, []);
+  }, [handleResize]);
 
 
   const handleMoreClick = useCallback(() => {
